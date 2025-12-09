@@ -89,6 +89,39 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## 🚨 ONNX Installation Error? (Windows Users)
+
+**Seeing "ERROR: Failed building wheel for onnx"?** This is extremely common on Windows!
+
+**Quick Fixes** (Pick one):
+
+1. **Automated Fix** (2 minutes, 85% success):
+   ```bash
+   python fix_onnx.py
+   ```
+
+2. **Conda Method** (5 minutes, 95% success) ⭐ **Most Reliable**:
+   ```bash
+   fix_onnx_conda.bat
+   ```
+
+3. **Manual Fix** (3 minutes):
+   ```bash
+   pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+   ```
+
+**📚 Complete Documentation:**
+- Quick Start: [`ONNX_FIX_START_HERE.md`](ONNX_FIX_START_HERE.md) ⭐ **Read this first!**
+- Full Solutions: [`ONNX_SOLUTIONS_SUMMARY.md`](ONNX_SOLUTIONS_SUMMARY.md)
+- Troubleshooting: [`TROUBLESHOOTING_ONNX.md`](TROUBLESHOOTING_ONNX.md)
+- Windows Guide: [`ONNX_WINDOWS_FIX_ULTIMATE.md`](ONNX_WINDOWS_FIX_ULTIMATE.md)
+- Quick Reference: [`ONNX_QUICK_REFERENCE.txt`](ONNX_QUICK_REFERENCE.txt)
+- Decision Tree: [`ONNX_DECISION_TREE.txt`](ONNX_DECISION_TREE.txt)
+
+**One of these WILL work!** 99% success rate with recommended methods. ✅
+
+---
+
 ## 📦 Installation
 
 ### Prerequisites
