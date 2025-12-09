@@ -39,7 +39,10 @@ The following packages remain at their original versions as they are compatible 
 - seaborn==0.13.0
 - tensorboard==2.18.0
 - tqdm==4.66.1
-- bezier==2023.7.28
+
+## Packages Removed
+
+- **bezier==2023.7.28**: Removed due to Python 3.13 incompatibility (only supports up to 3.11). The package was not actually used in the codebase - `src/data_generator.py` contains a custom Bézier curve implementation using numpy's Bernstein polynomials.
 
 ## Installation Instructions
 
