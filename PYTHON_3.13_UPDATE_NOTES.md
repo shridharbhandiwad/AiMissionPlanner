@@ -22,7 +22,7 @@ Many packages specified in the original requirements had maximum Python version 
 | matplotlib | 3.8.0 | 3.9.0 | Python 3.13 support |
 | plotly | 5.17.0 | 5.24.0 | Newer stable version |
 | onnx | 1.14.1 | 1.17.0 | Python 3.13 support |
-| onnxruntime | 1.16.0 | 1.19.0 | Python 3.13 support |
+| onnxruntime | 1.16.0 | 1.20.0 | Python 3.13 support (1.19.0 not available) |
 | fastapi | 0.104.0 | 0.115.0 | Python 3.13 support |
 | uvicorn | 0.23.2 | 0.30.0 | Python 3.13 support |
 | pydantic | 2.4.2 | 2.9.0 | Python 3.13 support |
