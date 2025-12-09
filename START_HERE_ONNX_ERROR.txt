@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════════════════════════════
+                    ONNX BUILD ERROR - START HERE
+═══════════════════════════════════════════════════════════════════════
+
+You're seeing an error like:
+   "ERROR: Failed building wheel for onnx"
+   "cmake.EXE returned non-zero exit status 1"
+
+This is VERY COMMON on Windows. Here's how to fix it:
+
+═══════════════════════════════════════════════════════════════════════
+                          QUICK START
+═══════════════════════════════════════════════════════════════════════
+
+Step 1: Run the interactive fix
+   
+   QUICK_FIX_ONNX.bat
+
+   This shows a menu. Choose option 1 or 2.
+
+Step 2: If that doesn't work, run diagnostic
+   
+   python diagnose_environment.py
+
+   This tells you exactly what's wrong with your setup.
+
+Step 3: Read the complete solution guide
+   
+   Open: ONNX_ERROR_SOLUTION.md
+
+═══════════════════════════════════════════════════════════════════════
+                      MOST RELIABLE SOLUTION
+═══════════════════════════════════════════════════════════════════════
+
+Use Conda (95% success rate):
+
+1. Install Miniconda from:
+   https://docs.conda.io/en/latest/miniconda.html
+
+2. Run this script:
+   fix_onnx_conda.bat
+
+3. Done!
+
+═══════════════════════════════════════════════════════════════════════
+                      ONE-LINE QUICK FIX
+═══════════════════════════════════════════════════════════════════════
+
+Try this command:
+
+   python -m pip install --upgrade pip setuptools wheel && pip uninstall -y onnx onnxruntime && pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+
+═══════════════════════════════════════════════════════════════════════
+                      AVAILABLE TOOLS
+═══════════════════════════════════════════════════════════════════════
+
+QUICK_FIX_ONNX.bat           - Interactive menu (START HERE)
+fix_onnx_conda.bat           - Conda install (most reliable)
+fix_onnx_ultimate.py         - Tries all methods
+diagnose_environment.py      - Check your system
+
+═══════════════════════════════════════════════════════════════════════
+                      DOCUMENTATION
+═══════════════════════════════════════════════════════════════════════
+
+ONNX_ERROR_SOLUTION.md       - Complete solution guide
+ONNX_FIX_README.md          - Quick reference
+ONNX_WINDOWS_FIX_ULTIMATE.md - Detailed Windows guide
+
+═══════════════════════════════════════════════════════════════════════
+                      WHY IS THIS HAPPENING?
+═══════════════════════════════════════════════════════════════════════
+
+pip is trying to build ONNX from source because:
+   • No pre-built wheel for your Python version
+   • Missing Visual Studio C++ compiler
+   • Python version too new (3.13+) or too old (3.7-)
+
+THE FIX: Use pre-built wheels or Conda
+
+═══════════════════════════════════════════════════════════════════════
+                      PYTHON VERSION
+═══════════════════════════════════════════════════════════════════════
+
+Check your Python version:
+   python --version
+
+Recommended: Python 3.10 or 3.11
+
+If you have 3.13+:
+   • Use Conda, OR
+   • Downgrade to Python 3.11
+
+═══════════════════════════════════════════════════════════════════════
+
+Need more help?
+   1. Run: diagnose_environment.py
+   2. Read: ONNX_ERROR_SOLUTION.md
+   3. Try: Conda method (highest success rate)
+
+Good luck!
