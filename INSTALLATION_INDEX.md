@@ -8,14 +8,16 @@
 Are you on Windows?
 │
 ├─ YES → Run install_windows.bat
-│        └─ Still have errors? → See ONNX_INSTALLATION_FIX.md
+│        └─ ONNX build error? → Run fix_onnx_windows.bat (NEW!)
+│        └─ Still have errors? → See ONNX_BUILD_ERROR_FIX.md
 │
 └─ NO → Are you on Linux/Mac?
          │
          ├─ YES → Run ./install_linux.sh
-         │        └─ Still have errors? → See ONNX_INSTALLATION_FIX.md
+         │        └─ ONNX build error? → Run python fix_onnx.py (NEW!)
+         │        └─ Still have errors? → See ONNX_BUILD_ERROR_FIX.md
          │
-         └─ Other → See ONNX_INSTALLATION_FIX.md (Method 3: Conda)
+         └─ Other → See ONNX_BUILD_ERROR_FIX.md (Conda/Docker methods)
 ```
 
 ## 📚 Documentation Quick Reference
@@ -43,6 +45,8 @@ Are you on Windows?
 |------|----------|---------|
 | `install_windows.bat` | Windows | Automated installation (RECOMMENDED) |
 | `install_linux.sh` | Linux/Mac | Automated installation (RECOMMENDED) |
+| `fix_onnx_windows.bat` | Windows | **NEW!** Fix ONNX build errors only |
+| `fix_onnx.py` | All | **NEW!** Cross-platform ONNX fix with diagnostics |
 
 ### Requirements Files (Dependency Lists)
 | File | Use Case |
@@ -54,6 +58,7 @@ Are you on Windows?
 | File | When to Read | Content |
 |------|--------------|---------|
 | `QUICK_START_WINDOWS.md` | Windows beginner | Simple step-by-step guide |
+| `ONNX_BUILD_ERROR_FIX.md` | **NEW!** Build errors | Complete ONNX fix guide with automated scripts |
 | `ONNX_INSTALLATION_FIX.md` | Build errors | Comprehensive troubleshooting (260 lines) |
 | `INSTALLATION_SUMMARY.md` | Want technical details | Solution overview |
 | `FIX_COMPLETE.md` | Developer/maintainer | Complete change summary |
@@ -72,12 +77,18 @@ install_windows.bat
 Done! If it fails, see `ONNX_INSTALLATION_FIX.md`
 
 ### Scenario 2: "I get 'Failed building wheel for onnx' error"
-**Solution**: You're in the right place! Do this:
+**Solution**: Run our automated fix script!
 ```bash
+# Windows - fastest solution
+fix_onnx_windows.bat
+
+# Or cross-platform Python script
+python fix_onnx.py
+
+# Or manual one-liner
 pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
-pip install -r requirements-windows.txt
 ```
-Or see `ONNX_INSTALLATION_FIX.md` for more options.
+See `ONNX_BUILD_ERROR_FIX.md` for complete guide with multiple solutions.
 
 ### Scenario 3: "I'm on Linux and it's not working"
 **Solution**:
@@ -109,9 +120,10 @@ See `PYTORCH_UPDATE_NOTES.md` for more details.
 
 | Error Message | Solution |
 |---------------|----------|
-| "Failed building wheel for onnx" | `ONNX_INSTALLATION_FIX.md` - Solution 1 or 2 |
-| "Microsoft Visual C++ 14.0 required" | `ONNX_INSTALLATION_FIX.md` - Section "Install Visual Studio Build Tools" |
-| "CMake not found" | `pip install cmake` or see `ONNX_INSTALLATION_FIX.md` |
+| "Failed building wheel for onnx" | **NEW!** Run `fix_onnx_windows.bat` or see `ONNX_BUILD_ERROR_FIX.md` |
+| "CMake build error" / "non-zero exit status" | **NEW!** Run `python fix_onnx.py` or see `ONNX_BUILD_ERROR_FIX.md` |
+| "Microsoft Visual C++ 14.0 required" | `ONNX_BUILD_ERROR_FIX.md` - Binary installation section |
+| "CMake not found" | `pip install cmake` or see `ONNX_BUILD_ERROR_FIX.md` |
 | "No matching distribution found" | Check Python version, see `PYTHON_3.13_UPDATE_NOTES.md` |
 | "torch not found" / CUDA errors | `PYTORCH_UPDATE_NOTES.md` |
 | "Package has no dependencies" | Upgrade pip: `python -m pip install --upgrade pip` |

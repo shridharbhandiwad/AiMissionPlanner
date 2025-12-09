@@ -177,15 +177,40 @@ pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorc
 
 ### Troubleshooting Installation Issues
 
-If you encounter build errors (especially with ONNX on Windows), see:
-- **[ONNX_INSTALLATION_FIX.md](ONNX_INSTALLATION_FIX.md)** - Comprehensive troubleshooting guide
+#### 🚨 ONNX Build Error on Windows?
+
+If you see **"Failed building wheel for onnx"** or **CMake build errors**, we have automated fixes:
+
+**Quick Fix (30 seconds):**
+```bash
+# Run the automated fix script (Windows)
+fix_onnx_windows.bat
+
+# Or use the cross-platform Python version
+python fix_onnx.py
+```
+
+**Manual One-Liner Fix:**
+```bash
+pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+```
+
+**Complete Guide**: See **[ONNX_BUILD_ERROR_FIX.md](ONNX_BUILD_ERROR_FIX.md)** for detailed solutions.
+
+#### Other Common Issues
+
+- **Python 3.13 compatibility**: Some packages don't support 3.13 yet, use Python 3.10 or 3.11
+- **CUDA not detected**: Install correct PyTorch CUDA version (see GPU Support above)
+- **Permission errors**: Run Command Prompt as Administrator (Windows)
+- **Package conflicts**: Create a fresh virtual environment
+
+#### Documentation Resources
+
+- **[ONNX_BUILD_ERROR_FIX.md](ONNX_BUILD_ERROR_FIX.md)** - ONNX build error solutions (NEW!)
+- **[ONNX_INSTALLATION_FIX.md](ONNX_INSTALLATION_FIX.md)** - Detailed ONNX troubleshooting
+- **[QUICK_START_WINDOWS.md](QUICK_START_WINDOWS.md)** - Windows quick start guide
 - **[PYTHON_3.13_UPDATE_NOTES.md](PYTHON_3.13_UPDATE_NOTES.md)** - Python version compatibility
 - **[PYTORCH_UPDATE_NOTES.md](PYTORCH_UPDATE_NOTES.md)** - PyTorch version information
-
-Common issues:
-- **"Failed building wheel for onnx"**: Use `requirements-windows.txt` or run `install_windows.bat`
-- **Python 3.13 compatibility**: Some packages don't support 3.13 yet, use Python 3.11 or 3.12
-- **CUDA not detected**: Install correct PyTorch CUDA version (see GPU Support above)
 
 ### C++ Setup (Optional)
 
