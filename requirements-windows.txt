@@ -1,0 +1,40 @@
+# Windows-Compatible Requirements
+# Use this file if you're on Windows and having issues with the standard requirements.txt
+# These versions are known to have pre-built wheels for Windows
+
+# Core ML/DL dependencies
+# For GPU support, install PyTorch separately:
+# pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu118
+torch==2.9.1
+torchvision==0.24.1
+numpy==1.26.4
+scipy==1.14.1
+
+# Data processing
+pandas==2.2.3
+scikit-learn==1.5.2
+
+# Visualization
+matplotlib==3.9.0
+seaborn==0.13.0
+plotly==5.24.0
+
+# Model export and inference - Using older versions with better Windows wheel support
+onnx==1.16.1
+onnxruntime==1.19.2
+
+# Training utilities
+tensorboard==2.18.0
+tqdm==4.66.1
+
+# API service (optional)
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+pydantic==2.9.0
+python-multipart==0.0.12
+
+# Trajectory generation algorithms
+shapely==2.0.6
+
+# Testing
+pytest==8.3.0

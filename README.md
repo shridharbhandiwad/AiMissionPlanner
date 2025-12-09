@@ -93,29 +93,99 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.8-3.12 (Python 3.13 has limited package support)
 - CUDA 11.0+ (optional, for GPU training)
 - CMake 3.15+ (for C++ inference)
 - ONNX Runtime 1.16+ (for C++ inference)
 
-### Python Environment Setup
+### Quick Installation
 
+#### Windows Users (RECOMMENDED)
+Use the automated installation script to avoid build errors:
+
+```bash
+# Run the Windows installation script
+install_windows.bat
+```
+
+This script will:
+- Create a virtual environment
+- Upgrade pip
+- Install pre-built wheels for all packages (avoiding build errors)
+- Verify the installation
+
+#### Linux/Mac Users
+Use the bash installation script:
+
+```bash
+# Make script executable (first time only)
+chmod +x install_linux.sh
+
+# Run the installation script
+./install_linux.sh
+```
+
+### Manual Installation
+
+#### Standard Installation (Linux/Mac)
 ```bash
 # Clone repository
 git clone <repository-url>
 cd mission-trajectory-planner
 
 # Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3 -m venv venv
+source venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Upgrade pip
+python -m pip install --upgrade pip setuptools wheel
 
-# Note: If you encounter issues with PyTorch installation, the requirements.txt
-# uses PyTorch 2.9.1 which is the latest stable version. For GPU support, use:
-# pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu118
+# Install dependencies with binary preference
+pip install --prefer-binary -r requirements.txt
 ```
+
+#### Windows Manual Installation
+```bash
+# Create virtual environment
+python -m venv venv
+venv\Scripts\activate
+
+# Upgrade pip
+python -m pip install --upgrade pip setuptools wheel
+
+# Install ONNX packages first (to avoid build errors)
+pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+
+# Install PyTorch (CPU version)
+pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cpu
+
+# Install remaining packages
+pip install -r requirements-windows.txt
+```
+
+### GPU Support (PyTorch with CUDA)
+
+For CUDA 11.8:
+```bash
+pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu118
+```
+
+For CUDA 12.1:
+```bash
+pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu121
+```
+
+### Troubleshooting Installation Issues
+
+If you encounter build errors (especially with ONNX on Windows), see:
+- **[ONNX_INSTALLATION_FIX.md](ONNX_INSTALLATION_FIX.md)** - Comprehensive troubleshooting guide
+- **[PYTHON_3.13_UPDATE_NOTES.md](PYTHON_3.13_UPDATE_NOTES.md)** - Python version compatibility
+- **[PYTORCH_UPDATE_NOTES.md](PYTORCH_UPDATE_NOTES.md)** - PyTorch version information
+
+Common issues:
+- **"Failed building wheel for onnx"**: Use `requirements-windows.txt` or run `install_windows.bat`
+- **Python 3.13 compatibility**: Some packages don't support 3.13 yet, use Python 3.11 or 3.12
+- **CUDA not detected**: Install correct PyTorch CUDA version (see GPU Support above)
 
 ### C++ Setup (Optional)
 
@@ -496,7 +566,13 @@ mission-trajectory-planner/
 │   └── trajectory_generator.onnx # ONNX model
 ├── results/                     # Evaluation results
 ├── logs/                        # TensorBoard logs
-├── requirements.txt             # Python dependencies
+├── requirements.txt             # Python dependencies (standard)
+├── requirements-windows.txt     # Windows-compatible dependencies
+├── install_windows.bat          # Windows installation script
+├── install_linux.sh             # Linux/Mac installation script
+├── ONNX_INSTALLATION_FIX.md    # ONNX troubleshooting guide
+├── PYTHON_3.13_UPDATE_NOTES.md # Python compatibility notes
+├── PYTORCH_UPDATE_NOTES.md     # PyTorch version notes
 ├── PROBLEM_FORMULATION.md      # Problem definition
 └── README.md                   # This file
 ```
@@ -551,7 +627,36 @@ tensorboard --logdir logs/
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Installation Issues
+
+**Issue**: Failed building wheel for onnx (Windows)
+```bash
+# Solution 1: Use the Windows installation script
+install_windows.bat
+
+# Solution 2: Install with binary-only flag
+pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+
+# Solution 3: See comprehensive guide
+# Read ONNX_INSTALLATION_FIX.md for detailed troubleshooting
+```
+
+**Issue**: Package version conflicts
+```bash
+# Solution: Use Windows-specific requirements
+pip install -r requirements-windows.txt
+```
+
+**Issue**: Python 3.13 compatibility errors
+```bash
+# Solution: Use Python 3.11 or 3.12
+# Create new environment with Python 3.11
+conda create -n trajectory python=3.11
+conda activate trajectory
+pip install -r requirements.txt
+```
+
+### Training Issues
 
 **Issue**: CUDA out of memory
 ```bash
@@ -565,11 +670,29 @@ python src/train.py --batch_size 32
 python src/train.py --lr 0.0001 --beta 0.0001
 ```
 
+**Issue**: Slow training on CPU
+```bash
+# Solution: Install PyTorch with GPU support
+pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu118
+```
+
+### Inference Issues
+
 **Issue**: ONNX Runtime not found (C++)
 ```bash
 # Solution: Set ONNXRUNTIME_ROOT_DIR
 export ONNXRUNTIME_ROOT_DIR=/path/to/onnxruntime
 ```
+
+**Issue**: Model checkpoint not found
+```bash
+# Solution: Check model path
+ls -l models/
+# Train model first if not exists
+python src/train.py
+```
+
+### API Issues
 
 **Issue**: API connection refused
 ```bash
@@ -578,6 +701,19 @@ ps aux | grep "app.py"
 # Start server
 python api/app.py
 ```
+
+**Issue**: ImportError when running API
+```bash
+# Solution: Ensure all dependencies are installed
+pip install -r requirements.txt
+```
+
+### Additional Help
+
+For detailed troubleshooting guides, see:
+- **ONNX_INSTALLATION_FIX.md** - Windows build errors and ONNX installation
+- **PYTHON_3.13_UPDATE_NOTES.md** - Python version compatibility
+- **PYTORCH_UPDATE_NOTES.md** - PyTorch installation and GPU support
 
 ## 📚 References
 
