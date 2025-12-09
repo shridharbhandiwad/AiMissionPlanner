@@ -2,11 +2,11 @@
 torch==2.9.1
 torchvision==0.24.1
 numpy==1.26.4
-scipy==1.11.4
+scipy==1.14.1  # Updated for Python 3.13 compatibility
 
 # Data processing
-pandas==2.2.0
-scikit-learn==1.4.0
+pandas==2.2.3  # Updated for Python 3.13 compatibility
+scikit-learn==1.5.2  # Updated for Python 3.13 compatibility
 
 # Visualization
 matplotlib==3.9.0
