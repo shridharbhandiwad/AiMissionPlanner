@@ -29,7 +29,7 @@ python-multipart==0.0.12
 
 # Trajectory generation algorithms
 shapely==2.0.6
-bezier==2023.7.28
+# Note: bezier package removed - using custom Bézier implementation in data_generator.py
 
 # Testing
 pytest==8.3.0
