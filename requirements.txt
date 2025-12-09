@@ -1,7 +1,7 @@
 # Core ML/DL dependencies
-torch==2.1.0
-torchvision==0.16.0
-numpy==1.24.3
+torch==2.9.1
+torchvision==0.24.1
+numpy==1.26.4
 scipy==1.11.3
 
 # Data processing
@@ -18,7 +18,7 @@ onnx==1.14.1
 onnxruntime==1.16.0
 
 # Training utilities
-tensorboard==2.14.1
+tensorboard==2.18.0
 tqdm==4.66.1
 
 # API service (optional)

@@ -3,7 +3,7 @@
 **Complete end-to-end system for generating optimal trajectories for defence simulation using deep learning.**
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.1.0-red.svg)](https://pytorch.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.9.1-red.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📋 Table of Contents
@@ -111,6 +111,10 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Note: If you encounter issues with PyTorch installation, the requirements.txt
+# uses PyTorch 2.9.1 which is the latest stable version. For GPU support, use:
+# pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cu118
 ```
 
 ### C++ Setup (Optional)
