@@ -128,28 +128,52 @@ def install_onnx_binary():
     # List of version combinations to try, in order of preference
     install_attempts = [
         {
-            "name": "Latest stable (1.16.1)",
+            "name": "Latest stable (1.17.0)",
+            "onnx": "1.17.0",
+            "runtime": "1.20.0",
+            "flags": "--only-binary :all:"
+        },
+        {
+            "name": "Stable (1.16.1)",
             "onnx": "1.16.1",
             "runtime": "1.19.2",
             "flags": "--only-binary :all:"
         },
         {
-            "name": "Latest stable with prefer-binary",
-            "onnx": "1.16.1",
-            "runtime": "1.19.2",
-            "flags": "--prefer-binary"
+            "name": "Stable (1.16.0)",
+            "onnx": "1.16.0",
+            "runtime": "1.18.1",
+            "flags": "--only-binary :all:"
         },
         {
             "name": "Previous stable (1.15.0)",
             "onnx": "1.15.0",
-            "runtime": "1.16.3",
+            "runtime": "1.17.1",
             "flags": "--only-binary :all:"
         },
         {
             "name": "Older stable (1.14.1)",
             "onnx": "1.14.1",
+            "runtime": "1.16.3",
+            "flags": "--only-binary :all:"
+        },
+        {
+            "name": "Older stable (1.14.0)",
+            "onnx": "1.14.0",
             "runtime": "1.16.0",
             "flags": "--only-binary :all:"
+        },
+        {
+            "name": "Conservative (1.13.1)",
+            "onnx": "1.13.1",
+            "runtime": "1.15.1",
+            "flags": "--only-binary :all:"
+        },
+        {
+            "name": "Last resort - latest with prefer-binary",
+            "onnx": "1.16.1",
+            "runtime": "1.19.2",
+            "flags": "--prefer-binary"
         },
     ]
     
