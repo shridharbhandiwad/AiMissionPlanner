@@ -35,8 +35,13 @@ python src/inference.py
 ## ❌ If You Get Errors
 
 ### Error: "Failed building wheel for onnx"
-**Solution**: The installation script should prevent this, but if it still happens:
 
+**FASTEST SOLUTION**: Run our automated fix script:
+```bash
+fix_onnx_windows.bat
+```
+
+**Or try the manual fix:**
 ```bash
 # Open a NEW command prompt and try:
 python -m pip install --upgrade pip
@@ -44,6 +49,8 @@ pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
 pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements-windows.txt
 ```
+
+**For detailed troubleshooting, see**: [ONNX_BUILD_ERROR_FIX.md](ONNX_BUILD_ERROR_FIX.md)
 
 ### Error: "Python not found"
 **Solution**: Install Python 3.9-3.12 from https://www.python.org/
@@ -96,9 +103,19 @@ pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorc
 
 ## 📖 Need More Help?
 
-- **ONNX build errors**: See `ONNX_INSTALLATION_FIX.md`
+- **ONNX build errors (NEW!)**: See `ONNX_BUILD_ERROR_FIX.md` - Complete guide with automated fixes
+- **ONNX build errors (detailed)**: See `ONNX_INSTALLATION_FIX.md` - Comprehensive troubleshooting
 - **Python version issues**: See `PYTHON_3.13_UPDATE_NOTES.md`
 - **General questions**: See `README.md`
+
+## 🛠️ Automated Fix Tools
+
+We provide several automated tools to help with installation:
+
+- **`fix_onnx_windows.bat`** - Automatic ONNX fix for Windows
+- **`fix_onnx.py`** - Cross-platform ONNX fix with diagnostics
+- **`install_windows.bat`** - Complete Windows installation
+- **`install_linux.sh`** - Complete Linux installation
 
 ## ✅ Verification Checklist
 
