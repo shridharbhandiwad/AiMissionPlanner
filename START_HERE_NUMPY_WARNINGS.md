@@ -1,15 +1,15 @@
 # 🚀 START HERE - NumPy Warnings Fix
 
-## Quick Status: ✅ ALREADY FIXED!
+## Quick Status: ✅ ALL SCRIPTS FIXED!
 
-The NumPy MINGW-W64 warnings you saw on Windows are **already fixed** in the code. You can simply run the script normally now.
+The NumPy MINGW-W64 warnings you saw on Windows are **already fixed** in all Python scripts. You can simply run any script normally now.
 
 ---
 
 ## What You Need to Know (30 seconds)
 
-1. **The warnings you saw are now suppressed** ✅
-2. **No action needed** - just run the script
+1. **The warnings you saw are now suppressed in ALL scripts** ✅
+2. **No action needed** - just run any script
 3. **No functionality was affected** - the code always worked correctly
 
 ---
@@ -18,15 +18,28 @@ The NumPy MINGW-W64 warnings you saw on Windows are **already fixed** in the cod
 
 ### Option 1: Standard (Recommended)
 ```bash
+# Training
+python src/train.py --epochs 100 --batch_size 64 --lr 0.001
+
+# Data Generation
 python src/data_generator.py
+
+# Evaluation
+python src/evaluate.py --checkpoint models/best_model.pth
+
+# Export to ONNX
+python src/export_onnx.py --checkpoint models/best_model.pth
+
+# API Server
+python api/app.py
 ```
 
-### Option 2: Windows Batch Script
+### Option 2: Windows Batch Script (Data Generation)
 ```bash
 run_data_generator.bat
 ```
 
-### Option 3: Linux/Mac Shell Script
+### Option 3: Linux/Mac Shell Script (Data Generation)
 ```bash
 ./run_data_generator.sh
 ```
@@ -50,7 +63,18 @@ These came from NumPy's internal initialization on Windows and were cosmetic onl
 
 ## What Was Fixed?
 
-The script (`src/data_generator.py`) now automatically suppresses these warnings before importing NumPy. You won't see them anymore when you run the script.
+All Python scripts now automatically suppress these warnings before importing NumPy. Fixed scripts include:
+
+- ✅ `src/train.py` - Training script
+- ✅ `src/data_generator.py` - Data generation
+- ✅ `src/evaluate.py` - Model evaluation
+- ✅ `src/export_onnx.py` - ONNX export
+- ✅ `src/inference.py` - Inference utilities
+- ✅ `src/visualize.py` - Visualization
+- ✅ `src/model.py` - Model definitions
+- ✅ `api/app.py` - API server
+
+You won't see NumPy warnings when running any of these scripts.
 
 ---
 
@@ -59,14 +83,17 @@ The script (`src/data_generator.py`) now automatically suppresses these warnings
 ### Quick Reference
 📄 **QUICK_FIX_NUMPY_WARNINGS.txt** - One-page reference with all solutions
 
+### Training Script Specific
+⭐ **TRAIN_SCRIPT_NUMPY_FIX.md** - Training script fix details
+
+### Complete Overview
+📋 **NUMPY_WARNINGS_FIX_COMPLETE.md** - Complete fix documentation for all scripts
+
 ### Comprehensive Guide
 📘 **NUMPY_MINGW_WARNINGS_FIX.md** - Complete explanation and alternatives
 
 ### Technical Summary
 🔧 **NUMPY_WARNINGS_FIX_SUMMARY.md** - Implementation details
-
-### Complete Overview
-📋 **FIX_COMPLETE_NUMPY_WARNINGS.md** - Executive summary of the fix
 
 ---
 
@@ -74,29 +101,37 @@ The script (`src/data_generator.py`) now automatically suppresses these warnings
 
 **Unlikely, but if you do:**
 
-1. Make sure you're using the latest version of `src/data_generator.py`
-2. Try the batch/shell scripts instead: `run_data_generator.bat` or `./run_data_generator.sh`
-3. Read **NUMPY_MINGW_WARNINGS_FIX.md** for alternative solutions
-4. For production use, consider reinstalling NumPy from conda: `conda install numpy -c conda-forge`
+1. Make sure you're using the latest version of all scripts
+2. Try using the `-W ignore` flag: `python -W ignore src/train.py`
+3. Read **TRAIN_SCRIPT_NUMPY_FIX.md** for training-specific solutions
+4. Read **NUMPY_WARNINGS_FIX_COMPLETE.md** for comprehensive documentation
+5. For production use, consider reinstalling NumPy from conda: `conda install numpy -c conda-forge`
 
 ---
 
 ## That's It!
 
-You're all set. The warnings are suppressed, and you can use the script normally.
+You're all set. The warnings are suppressed, and you can use any script normally.
 
-**Just run:** `python src/data_generator.py`
+**Just run any script:**
+```bash
+python src/train.py --epochs 100 --batch_size 64 --lr 0.001
+python src/data_generator.py
+python src/evaluate.py
+```
 
 ---
 
 ## Questions?
 
+- Check **TRAIN_SCRIPT_NUMPY_FIX.md** for training-specific help
+- Check **NUMPY_WARNINGS_FIX_COMPLETE.md** for comprehensive info
 - Check **README.md** (Troubleshooting section)
 - Read **NUMPY_MINGW_WARNINGS_FIX.md** for detailed info
 - Open an issue on GitHub if you still have problems
 
 ---
 
-**Status**: ✅ Fixed and tested
+**Status**: ✅ Fixed and tested in all scripts
 **Date**: December 10, 2025
-**Branch**: cursor/generate-data-script-warnings-6e2e
+**Branch**: cursor/train-model-parameters-1103
