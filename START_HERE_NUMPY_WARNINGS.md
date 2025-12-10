@@ -74,6 +74,10 @@ All Python scripts now automatically suppress these warnings before importing Nu
 - ✅ `src/model.py` - Model definitions
 - ✅ `src/trajectory_gui.py` - Trajectory GUI
 - ✅ `run_trajectory_gui.py` - GUI launcher
+- ✅ `test_opengl_display.py` - OpenGL display test
+- ✅ `fix_onnx.py` - ONNX installation fixer
+- ✅ `fix_onnx_ultimate.py` - Ultimate ONNX fixer
+- ✅ `examples/trajectory_gui_examples.py` - Trajectory examples
 - ✅ `api/app.py` - API server
 
 You won't see NumPy warnings when running any of these scripts.

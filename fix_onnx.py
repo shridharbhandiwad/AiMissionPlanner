@@ -4,6 +4,14 @@ ONNX Installation Fix Script
 Automatically diagnoses and fixes ONNX build errors on Windows
 """
 
+# Suppress NumPy MINGW-W64 warnings on Windows
+import warnings
+
+# Filter warnings before NumPy import to suppress MINGW-W64 build warnings
+warnings.filterwarnings('ignore', message='.*MINGW-W64.*')
+warnings.filterwarnings('ignore', category=RuntimeWarning, module='numpy')
+warnings.filterwarnings('ignore', message='.*invalid value encountered.*')
+
 import sys
 import subprocess
 import platform

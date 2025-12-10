@@ -23,6 +23,16 @@ The following scripts now have automatic warning suppression:
 ### GUI Launcher Scripts
 - ✅ `run_trajectory_gui.py` - **NEW FIX**
 
+### Test Scripts
+- ✅ `test_opengl_display.py` - **NEW FIX**
+
+### Utility Scripts
+- ✅ `fix_onnx.py` - **NEW FIX**
+- ✅ `fix_onnx_ultimate.py` - **NEW FIX**
+
+### Example Scripts (`examples/`)
+- ✅ `examples/trajectory_gui_examples.py` - **NEW FIX**
+
 ### API Scripts (`api/`)
 - ✅ `api/app.py` - **NEW FIX**
 
