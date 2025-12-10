@@ -58,12 +58,12 @@ echo.
 
 REM Install ONNX packages first with binary-only flag
 echo Installing ONNX packages...
-pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+pip install --only-binary :all: onnx==1.18.0 onnxruntime==1.20.0
 if errorlevel 1 (
     echo.
     echo WARNING: Failed to install ONNX with --only-binary flag
     echo Trying with --prefer-binary instead...
-    pip install --prefer-binary onnx==1.16.1 onnxruntime==1.19.2
+    pip install --prefer-binary onnx==1.18.0 onnxruntime==1.20.0
     if errorlevel 1 (
         echo.
         echo ERROR: Failed to install ONNX packages
