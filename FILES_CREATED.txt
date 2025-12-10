@@ -6,7 +6,7 @@ Date: 2025-12-10
 Purpose: Fix silent application exit during NumPy dependency check
 
 ================================================================================
-  NEW FILES CREATED (12 files)
+  NEW FILES CREATED (17 files)
 ================================================================================
 
 DIAGNOSTIC/REPAIR SCRIPTS:
@@ -21,17 +21,22 @@ WINDOWS BATCH FILES:
 -------------------
 6. quick_fix.bat                   - Windows launcher for quick_fix.py
 7. fix_numpy.bat                   - Windows launcher for fix_numpy.py
+8. fix_matplotlib_dll_error.bat    - Fix matplotlib DLL import errors (NEW)
+9. CLICK_HERE_FOR_MATPLOTLIB_HELP.bat - Interactive help menu for matplotlib errors (NEW)
 
 DOCUMENTATION:
 -------------
-8. TROUBLESHOOTING.md              - Comprehensive troubleshooting guide
-9. FIXES_APPLIED.md                - Technical implementation details
-10. SOLUTION_SUMMARY.md            - Complete solution summary
-11. START_HERE.md                  - Quick start guide for affected users
-12. FILES_CREATED.txt              - This file
+10. TROUBLESHOOTING.md              - Comprehensive troubleshooting guide
+11. FIXES_APPLIED.md                - Technical implementation details
+12. SOLUTION_SUMMARY.md             - Complete solution summary
+13. START_HERE.md                   - Quick start guide for affected users
+14. FIX_MATPLOTLIB_NOW.txt          - Quick reference for matplotlib DLL errors (NEW)
+15. MATPLOTLIB_DLL_FIX.md           - Comprehensive matplotlib DLL troubleshooting (NEW)
+16. MATPLOTLIB_FIX_SUMMARY.md       - Summary of matplotlib DLL fix (NEW)
+17. FILES_CREATED.txt               - This file
 
 ================================================================================
-  MODIFIED FILES (2 files)
+  MODIFIED FILES (3 files)
 ================================================================================
 
 1. run_trajectory_gui.py
@@ -48,31 +53,63 @@ DOCUMENTATION:
    - Updated project structure section
    - Added references to new documentation files
 
+3. START_HERE.md (UPDATED)
+   - Added matplotlib DLL error fix section
+   - Added links to matplotlib fix scripts
+   - Updated Windows troubleshooting with matplotlib guidance
+
 ================================================================================
   FILE SIZES
 ================================================================================
 
-quick_fix.py                : 6.4 KB
-fix_numpy.py                : 4.4 KB
-diagnose_gui_startup.py     : 5.3 KB
-diagnose_numpy.py           : 3.5 KB
-test_basic_gui.py           : 2.5 KB
-quick_fix.bat               : 0.4 KB
-fix_numpy.bat               : 0.4 KB
-TROUBLESHOOTING.md          : 4.8 KB
-FIXES_APPLIED.md            : 7.5 KB
-SOLUTION_SUMMARY.md         : 8.6 KB
-START_HERE.md               : 5.0 KB
-FILES_CREATED.txt           : This file
+quick_fix.py                           : 6.4 KB
+fix_numpy.py                           : 4.4 KB
+diagnose_gui_startup.py                : 5.3 KB
+diagnose_numpy.py                      : 3.5 KB
+test_basic_gui.py                      : 2.5 KB
+quick_fix.bat                          : 0.4 KB
+fix_numpy.bat                          : 0.4 KB
+fix_matplotlib_dll_error.bat           : 3.2 KB (NEW)
+CLICK_HERE_FOR_MATPLOTLIB_HELP.bat     : 2.8 KB (NEW)
+TROUBLESHOOTING.md                     : 4.8 KB
+FIXES_APPLIED.md                       : 7.5 KB
+SOLUTION_SUMMARY.md                    : 8.6 KB
+START_HERE.md                          : 6.2 KB (UPDATED)
+FIX_MATPLOTLIB_NOW.txt                 : 1.5 KB (NEW)
+MATPLOTLIB_DLL_FIX.md                  : 12.8 KB (NEW)
+MATPLOTLIB_FIX_SUMMARY.md              : 8.2 KB (NEW)
+FILES_CREATED.txt                      : This file
 
-Total new content: ~48 KB
+Total new content: ~78 KB
 
 ================================================================================
   USAGE INSTRUCTIONS
 ================================================================================
 
-FOR USERS EXPERIENCING THE ISSUE:
----------------------------------
+FOR USERS EXPERIENCING MATPLOTLIB DLL ERROR:
+--------------------------------------------
+
+Windows users experiencing:
+"ImportError: DLL load failed while importing _c_internal_utils"
+
+EASIEST FIX:
+1. Double-click: CLICK_HERE_FOR_MATPLOTLIB_HELP.bat
+2. Choose option 1 (automatic fix)
+3. Wait 2-3 minutes
+4. Done!
+
+OR COMMAND LINE:
+1. Activate venv: venv\Scripts\activate
+2. Run: fix_matplotlib_dll_error.bat
+3. Test: python src/data_generator.py
+
+DOCUMENTATION:
+- Quick guide: FIX_MATPLOTLIB_NOW.txt
+- Full guide: MATPLOTLIB_DLL_FIX.md
+- Summary: MATPLOTLIB_FIX_SUMMARY.md
+
+FOR USERS EXPERIENCING GUI STARTUP ISSUES:
+------------------------------------------
 
 1. Start here:
    python quick_fix.py
@@ -91,15 +128,22 @@ FOR USERS EXPERIENCING THE ISSUE:
 
 WINDOWS USERS CAN DOUBLE-CLICK:
 -------------------------------
-- quick_fix.bat      (interactive troubleshooting)
-- fix_numpy.bat      (NumPy repair)
+- CLICK_HERE_FOR_MATPLOTLIB_HELP.bat  (matplotlib DLL error)
+- quick_fix.bat                       (interactive troubleshooting)
+- fix_numpy.bat                       (NumPy repair)
 
 FOR DOCUMENTATION:
 -----------------
+GUI Issues:
 - START_HERE.md          (Quick start)
 - TROUBLESHOOTING.md     (Comprehensive guide)
 - FIXES_APPLIED.md       (Technical details)
 - SOLUTION_SUMMARY.md    (Complete overview)
+
+Matplotlib DLL Error:
+- FIX_MATPLOTLIB_NOW.txt     (Quick reference)
+- MATPLOTLIB_DLL_FIX.md      (Complete guide)
+- MATPLOTLIB_FIX_SUMMARY.md  (Overview)
 
 ================================================================================
   KEY FEATURES

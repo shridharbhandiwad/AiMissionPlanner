@@ -1,0 +1,71 @@
+========================================
+MATPLOTLIB DLL ERROR - QUICK FIX
+========================================
+
+ERROR YOU'RE SEEING:
+  ImportError: DLL load failed while importing _c_internal_utils
+
+WHAT THIS MEANS:
+  Windows is missing required DLL files for matplotlib
+
+QUICK FIX (3 STEPS):
+========================================
+
+1. ACTIVATE YOUR VIRTUAL ENVIRONMENT
+   
+   Open Command Prompt and run:
+   cd "D:\Zoppler Projects\AiMissionPlanner"
+   venv\Scripts\activate
+
+
+2. RUN THE FIX SCRIPT
+   
+   fix_matplotlib_dll_error.bat
+   
+   This takes 2-3 minutes and will:
+   ✓ Reinstall matplotlib properly
+   ✓ Fix numpy compatibility
+   ✓ Clear corrupted cache
+   ✓ Verify everything works
+
+
+3. TEST THE FIX
+   
+   python src/data_generator.py
+
+
+========================================
+DIDN'T WORK? DO THIS:
+========================================
+
+The #1 cause is missing Microsoft Visual C++ files.
+
+DOWNLOAD AND INSTALL:
+https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+Then:
+1. Restart your computer (important!)
+2. Run fix_matplotlib_dll_error.bat again
+3. Try python src/data_generator.py
+
+========================================
+STILL NOT WORKING?
+========================================
+
+See detailed guide: MATPLOTLIB_DLL_FIX.md
+
+Or switch to Conda (easier on Windows):
+- Download: https://docs.conda.io/en/latest/miniconda.html
+- Install Miniconda
+- Run: conda install matplotlib numpy scipy
+
+========================================
+SUMMARY
+========================================
+
+FIX SCRIPT:      fix_matplotlib_dll_error.bat
+FULL GUIDE:      MATPLOTLIB_DLL_FIX.md
+VC++ DOWNLOAD:   https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+Most users: Just run fix_matplotlib_dll_error.bat
+If that fails: Install VC++ Redistributables + restart
