@@ -93,34 +93,12 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 
 ## 🚨 ONNX Installation Error? (Windows Users)
 
-**Seeing "ERROR: Failed building wheel for onnx"?** This is extremely common on Windows!
+**Seeing "ERROR: Failed building wheel for onnx"?** This is common on Windows!
 
-**Quick Fixes** (Pick one):
-
-1. **Automated Fix** (2 minutes, 85% success):
-   ```bash
-   python fix_onnx.py
-   ```
-
-2. **Conda Method** (5 minutes, 95% success) ⭐ **Most Reliable**:
-   ```bash
-   fix_onnx_conda.bat
-   ```
-
-3. **Manual Fix** (3 minutes):
-   ```bash
-   pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
-   ```
-
-**📚 Complete Documentation:**
-- Quick Start: [`ONNX_FIX_START_HERE.md`](ONNX_FIX_START_HERE.md) ⭐ **Read this first!**
-- Full Solutions: [`ONNX_SOLUTIONS_SUMMARY.md`](ONNX_SOLUTIONS_SUMMARY.md)
-- Troubleshooting: [`TROUBLESHOOTING_ONNX.md`](TROUBLESHOOTING_ONNX.md)
-- Windows Guide: [`ONNX_WINDOWS_FIX_ULTIMATE.md`](ONNX_WINDOWS_FIX_ULTIMATE.md)
-- Quick Reference: [`ONNX_QUICK_REFERENCE.txt`](ONNX_QUICK_REFERENCE.txt)
-- Decision Tree: [`ONNX_DECISION_TREE.txt`](ONNX_DECISION_TREE.txt)
-
-**One of these WILL work!** 99% success rate with recommended methods. ✅
+**Quick Fix**:
+```bash
+pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+```
 
 ---
 
@@ -135,28 +113,16 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 
 ### Quick Installation
 
-#### Windows Users (RECOMMENDED)
-Use the automated installation script to avoid build errors:
+#### Automated Installation
 
+**Windows:**
 ```bash
-# Run the Windows installation script
 install_windows.bat
 ```
 
-This script will:
-- Create a virtual environment
-- Upgrade pip
-- Install pre-built wheels for all packages (avoiding build errors)
-- Verify the installation
-
-#### Linux/Mac Users
-Use the bash installation script:
-
+**Linux/Mac:**
 ```bash
-# Make script executable (first time only)
 chmod +x install_linux.sh
-
-# Run the installation script
 ./install_linux.sh
 ```
 
@@ -214,38 +180,17 @@ pip install torch==2.9.1 torchvision==0.24.1 --index-url https://download.pytorc
 
 #### 🚨 ONNX Build Error on Windows?
 
-If you see **"Failed building wheel for onnx"** or **CMake build errors**, we have automated fixes:
-
-**Quick Fix (30 seconds):**
-```bash
-# Run the automated fix script (Windows)
-fix_onnx_windows.bat
-
-# Or use the cross-platform Python version
-python fix_onnx.py
-```
-
-**Manual One-Liner Fix:**
+**Quick Fix:**
 ```bash
 pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
 ```
 
-**Complete Guide**: See **[ONNX_BUILD_ERROR_FIX.md](ONNX_BUILD_ERROR_FIX.md)** for detailed solutions.
-
 #### Other Common Issues
 
-- **Python 3.13 compatibility**: Some packages don't support 3.13 yet, use Python 3.10 or 3.11
+- **Python 3.13 compatibility**: Some packages don't support 3.13 yet, use Python 3.10-3.12
 - **CUDA not detected**: Install correct PyTorch CUDA version (see GPU Support above)
 - **Permission errors**: Run Command Prompt as Administrator (Windows)
 - **Package conflicts**: Create a fresh virtual environment
-
-#### Documentation Resources
-
-- **[ONNX_BUILD_ERROR_FIX.md](ONNX_BUILD_ERROR_FIX.md)** - ONNX build error solutions (NEW!)
-- **[ONNX_INSTALLATION_FIX.md](ONNX_INSTALLATION_FIX.md)** - Detailed ONNX troubleshooting
-- **[QUICK_START_WINDOWS.md](QUICK_START_WINDOWS.md)** - Windows quick start guide
-- **[PYTHON_3.13_UPDATE_NOTES.md](PYTHON_3.13_UPDATE_NOTES.md)** - Python version compatibility
-- **[PYTORCH_UPDATE_NOTES.md](PYTORCH_UPDATE_NOTES.md)** - PyTorch version information
 
 ### C++ Setup (Optional)
 
@@ -285,7 +230,6 @@ python run_trajectory_gui.py
 - Real-time 3D visualization
 - Customizable parameters (speed, altitude, g-forces, turn radius)
 - Export trajectories for simulation
-- See [TRAJECTORY_GUI_README.md](TRAJECTORY_GUI_README.md) for detailed guide
 
 ### Option 2: AI-Generated Trajectories (For Training ML Models)
 
@@ -296,16 +240,6 @@ python src/data_generator.py
 ```
 
 This generates 50,000 trajectories and saves to `data/trajectories.npz` (~5-10 minutes).
-
-**Windows Users**: If you see NumPy MINGW-W64 warnings, you can use the provided batch script:
-```bash
-run_data_generator.bat
-```
-
-**Linux/Mac Users**: Use the shell script for a cleaner output:
-```bash
-./run_data_generator.sh
-```
 
 ### Step 2: Train Model
 
@@ -665,13 +599,9 @@ mission-trajectory-planner/
 ├── requirements-windows.txt     # Windows-compatible dependencies
 ├── install_windows.bat          # Windows installation script
 ├── install_linux.sh             # Linux/Mac installation script
-├── run_trajectory_gui.py        # GUI launcher (NEW!)
-├── run_trajectory_gui.bat       # GUI launcher for Windows (NEW!)
-├── run_trajectory_gui.sh        # GUI launcher for Linux/Mac (NEW!)
-├── TRAJECTORY_GUI_README.md     # GUI documentation (NEW!)
-├── ONNX_INSTALLATION_FIX.md    # ONNX troubleshooting guide
-├── PYTHON_3.13_UPDATE_NOTES.md # Python compatibility notes
-├── PYTORCH_UPDATE_NOTES.md     # PyTorch version notes
+├── run_trajectory_gui.py        # GUI launcher
+├── run_trajectory_gui.bat       # GUI launcher for Windows
+├── run_trajectory_gui.sh        # GUI launcher for Linux/Mac
 ├── PROBLEM_FORMULATION.md      # Problem definition
 └── README.md                   # This file
 ```
@@ -740,34 +670,15 @@ pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
 # Read ONNX_INSTALLATION_FIX.md for detailed troubleshooting
 ```
 
-**Issue**: NumPy MINGW-W64 warnings on Windows
-```
-Warning: Numpy built with MINGW-W64 on Windows 64 bits is experimental...
-RuntimeWarning: invalid value encountered in exp2
-```
-```bash
-# Solution: These warnings are now automatically suppressed in the code
-# The script will run normally without displaying these warnings
-
-# Alternative: Run with Python warning suppression flag
-python -W ignore src/data_generator.py
-
-# Or use the provided batch script (Windows)
-run_data_generator.bat
-
-# For more details, see NUMPY_MINGW_WARNINGS_FIX.md
-```
-
 **Issue**: Package version conflicts
 ```bash
-# Solution: Use Windows-specific requirements
+# Solution: Use Windows-specific requirements (if on Windows)
 pip install -r requirements-windows.txt
 ```
 
 **Issue**: Python 3.13 compatibility errors
 ```bash
-# Solution: Use Python 3.11 or 3.12
-# Create new environment with Python 3.11
+# Solution: Use Python 3.10-3.12
 conda create -n trajectory python=3.11
 conda activate trajectory
 pip install -r requirements.txt
@@ -824,13 +735,6 @@ python api/app.py
 # Solution: Ensure all dependencies are installed
 pip install -r requirements.txt
 ```
-
-### Additional Help
-
-For detailed troubleshooting guides, see:
-- **ONNX_INSTALLATION_FIX.md** - Windows build errors and ONNX installation
-- **PYTHON_3.13_UPDATE_NOTES.md** - Python version compatibility
-- **PYTORCH_UPDATE_NOTES.md** - PyTorch installation and GPU support
 
 ## 📚 References
 
