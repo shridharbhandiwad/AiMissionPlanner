@@ -41,11 +41,16 @@ if __name__ == '__main__':
         sys.stdout.flush()
         import numpy
         print("✓")
+        sys.stdout.flush()
     except ImportError as e:
         print(f"✗\n  Error: {e}")
+        sys.stdout.flush()
         all_deps_ok = False
     except Exception as e:
         print(f"✗\n  Unexpected error: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.stdout.flush()
         all_deps_ok = False
     
     try:
