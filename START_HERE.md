@@ -16,6 +16,22 @@ Your application was exiting silently during the NumPy dependency check. This is
 
 ### Windows Users (RECOMMENDED)
 
+#### Matplotlib DLL Error Fix
+
+If you're getting:
+```
+ImportError: DLL load failed while importing _c_internal_utils
+```
+
+**Quick Fix:**
+```batch
+fix_matplotlib_dll_error.bat
+```
+
+This will fix the matplotlib DLL import error. See `FIX_MATPLOTLIB_NOW.txt` or `MATPLOTLIB_DLL_FIX.md` for details.
+
+#### NumPy/GUI Dependencies Fix
+
 If you're getting **NumPy MINGW-W64 warnings** or **missing PyQt5/PyQtGraph** errors, run:
 
 ```batch
@@ -128,6 +144,25 @@ run_trajectory_gui.bat
 ## 💡 Common Solutions
 
 ### Windows Users
+
+#### If you see Matplotlib DLL errors:
+
+**Error message:**
+```
+ImportError: DLL load failed while importing _c_internal_utils
+```
+
+**SOLUTION:**
+```batch
+fix_matplotlib_dll_error.bat
+```
+
+**Quick start guide:** `FIX_MATPLOTLIB_NOW.txt`
+**Full guide:** `MATPLOTLIB_DLL_FIX.md`
+
+**Most common cause:** Missing Visual C++ Redistributables
+- Download: https://aka.ms/vs/17/release/vc_redist.x64.exe
+- Install and restart computer
 
 #### If you see NumPy MINGW-W64 warnings or missing GUI packages:
 
