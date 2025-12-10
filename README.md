@@ -43,6 +43,7 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 - ✅ **C++ Implementation**: High-performance inference with ONNX Runtime
 - ✅ **REST API**: FastAPI microservice for integration
 - ✅ **Visualization**: 3D plots and interactive visualizations
+- ✅ **Interactive 3D GUI**: PyQt5-based trajectory generator with 12+ trajectory types
 
 ### Advanced Features
 - 🎯 Multiple diverse trajectory candidates
@@ -51,6 +52,7 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 - 🎨 Interactive 3D visualization with Plotly
 - ⚡ GPU acceleration support
 - 🔄 Real-time trajectory updates
+- 🖥️ **NEW: 3D GUI** for interactive trajectory design (Bezier, Spiral, S-Curve, L-Curve, etc.)
 
 ## 🏗️ System Architecture
 
@@ -262,6 +264,30 @@ cd ../..
 ```
 
 ## 🚀 Quick Start
+
+### Option 1: Interactive 3D GUI (Recommended for Manual Design) 🆕
+
+Launch the interactive trajectory generator GUI:
+
+```bash
+# Windows
+run_trajectory_gui.bat
+
+# Linux/Mac
+./run_trajectory_gui.sh
+
+# Or directly
+python run_trajectory_gui.py
+```
+
+**Features**:
+- 12 trajectory types (Bezier, Circular, Spiral, S-Curve, L-Curve, Helix, etc.)
+- Real-time 3D visualization
+- Customizable parameters (speed, altitude, g-forces, turn radius)
+- Export trajectories for simulation
+- See [TRAJECTORY_GUI_README.md](TRAJECTORY_GUI_README.md) for detailed guide
+
+### Option 2: AI-Generated Trajectories (For Training ML Models)
 
 ### Step 1: Generate Dataset
 
@@ -616,7 +642,8 @@ mission-trajectory-planner/
 │   ├── inference.py             # Inference utilities
 │   ├── evaluate.py              # Evaluation suite
 │   ├── export_onnx.py          # ONNX export
-│   └── visualize.py            # Visualization tools
+│   ├── visualize.py            # Visualization tools
+│   └── trajectory_gui.py       # 3D GUI application (NEW!)
 ├── api/                         # FastAPI microservice
 │   ├── __init__.py
 │   ├── app.py                  # API server
@@ -638,6 +665,10 @@ mission-trajectory-planner/
 ├── requirements-windows.txt     # Windows-compatible dependencies
 ├── install_windows.bat          # Windows installation script
 ├── install_linux.sh             # Linux/Mac installation script
+├── run_trajectory_gui.py        # GUI launcher (NEW!)
+├── run_trajectory_gui.bat       # GUI launcher for Windows (NEW!)
+├── run_trajectory_gui.sh        # GUI launcher for Linux/Mac (NEW!)
+├── TRAJECTORY_GUI_README.md     # GUI documentation (NEW!)
 ├── ONNX_INSTALLATION_FIX.md    # ONNX troubleshooting guide
 ├── PYTHON_3.13_UPDATE_NOTES.md # Python compatibility notes
 ├── PYTORCH_UPDATE_NOTES.md     # PyTorch version notes
