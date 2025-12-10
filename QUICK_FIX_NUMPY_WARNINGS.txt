@@ -17,17 +17,32 @@ GOOD NEWS: These warnings don't affect functionality! ✓
 ║                             SOLUTION STATUS                                ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
-✅ ALREADY FIXED IN CODE
-   The warnings are now automatically suppressed in src/data_generator.py
-   You can run the script normally and won't see these warnings!
+✅ ALREADY FIXED IN ALL SCRIPTS
+   The warnings are now automatically suppressed in ALL Python scripts:
+   • src/train.py ⭐ NEW
+   • src/data_generator.py
+   • src/evaluate.py
+   • src/export_onnx.py
+   • src/inference.py
+   • src/visualize.py
+   • src/model.py
+   • api/app.py
+   
+   You can run any script normally and won't see these warnings!
 
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                           USAGE (PICK ONE)                                 ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
-1. STANDARD (warnings already suppressed in code)
-   ─────────────────────────────────────────────
+1. STANDARD (warnings already suppressed in code) ⭐ RECOMMENDED
+   ─────────────────────────────────────────────────────────────
+   python src/train.py --epochs 100 --batch_size 64 --lr 0.001
    python src/data_generator.py
+   python src/evaluate.py
+   python src/export_onnx.py
+   python api/app.py
+   
+   ALL scripts now have automatic warning suppression!
 
 
 2. WINDOWS BATCH SCRIPT (extra suppression)
@@ -42,7 +57,7 @@ GOOD NEWS: These warnings don't affect functionality! ✓
 
 4. COMMAND LINE FLAG (manual override)
    ───────────────────────────────────
-   python -W ignore src/data_generator.py
+   python -W ignore src/train.py --epochs 100
 
 
 5. ENVIRONMENT VARIABLE (manual override)
@@ -51,7 +66,7 @@ GOOD NEWS: These warnings don't affect functionality! ✓
    Windows PS:        $env:PYTHONWARNINGS="ignore::RuntimeWarning"
    Linux/Mac:         export PYTHONWARNINGS=ignore::RuntimeWarning
    
-   Then run:          python src/data_generator.py
+   Then run:          python src/train.py --epochs 100
 
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                    PERMANENT FIX (PRODUCTION USE)                          ║
@@ -87,7 +102,7 @@ C. DIFFERENT VERSION
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
 ✓ Warnings are COSMETIC only - code works correctly
-✓ Already fixed in src/data_generator.py
+✓ Already fixed in ALL Python scripts (train.py, data_generator.py, etc.)
 ✓ No breaking changes to functionality
 ✓ Multiple suppression methods available
 ✓ Production users should use conda's NumPy build
@@ -97,11 +112,12 @@ C. DIFFERENT VERSION
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
 Still seeing issues? Check:
-1. Make sure you're using the latest version of src/data_generator.py
+1. Make sure you're using the latest version of all scripts
 2. Read NUMPY_MINGW_WARNINGS_FIX.md for detailed solutions
-3. Check README.md troubleshooting section
-4. Open an issue on GitHub with your error message
+3. Check NUMPY_WARNINGS_FIX_COMPLETE.md for comprehensive info
+4. Check README.md troubleshooting section
+5. Open an issue on GitHub with your error message
 
 ────────────────────────────────────────────────────────────────────────────
-Status: ✅ FIXED | Branch: cursor/generate-data-script-warnings-6e2e
+Status: ✅ FIXED ALL SCRIPTS | Branch: cursor/train-model-parameters-1103
 ────────────────────────────────────────────────────────────────────────────
