@@ -91,14 +91,42 @@ This project implements a **Conditional Variational Autoencoder (CVAE)** based t
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 🚨 ONNX Installation Error? (Windows Users)
+## 🚨 Installation/Startup Issues?
 
-**Seeing "ERROR: Failed building wheel for onnx"?** This is common on Windows!
+### GUI Exits Immediately or Dependencies Not Working?
 
-**Quick Fix**:
+**Quick Fix Tools:**
+
 ```bash
-pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+# Interactive fix tool (Recommended)
+python quick_fix.py
+
+# Automatic NumPy repair
+python fix_numpy.py
+
+# Full dependency diagnostics
+python diagnose_gui_startup.py
+
+# Test NumPy specifically
+python diagnose_numpy.py
+
+# Test basic GUI
+python test_basic_gui.py
 ```
+
+**See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for comprehensive troubleshooting guide.**
+
+### Common Issues:
+
+#### 🔴 Application exits during NumPy check
+- **Symptom**: Prints "[1/5] Checking NumPy..." then exits
+- **Fix**: `python fix_numpy.py`
+
+#### 🔴 ONNX build errors (Windows)
+- **Fix**: `pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2`
+
+#### 🔴 PyQt5/OpenGL errors
+- **Fix**: `python quick_fix.py`
 
 ---
 
@@ -602,6 +630,12 @@ mission-trajectory-planner/
 ├── run_trajectory_gui.py        # GUI launcher
 ├── run_trajectory_gui.bat       # GUI launcher for Windows
 ├── run_trajectory_gui.sh        # GUI launcher for Linux/Mac
+├── quick_fix.py                # Interactive troubleshooting tool (NEW!)
+├── fix_numpy.py                # NumPy repair script (NEW!)
+├── diagnose_gui_startup.py     # GUI diagnostics (NEW!)
+├── diagnose_numpy.py           # NumPy diagnostics (NEW!)
+├── test_basic_gui.py           # Basic GUI test (NEW!)
+├── TROUBLESHOOTING.md          # Comprehensive troubleshooting guide (NEW!)
 ├── PROBLEM_FORMULATION.md      # Problem definition
 └── README.md                   # This file
 ```
@@ -655,6 +689,14 @@ tensorboard --logdir logs/
 ```
 
 ## 🐛 Troubleshooting
+
+**📖 See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for the complete troubleshooting guide.**
+
+**🔧 Quick Fix Tools:**
+- `python quick_fix.py` - Interactive troubleshooting
+- `python fix_numpy.py` - Fix NumPy issues
+- `python diagnose_gui_startup.py` - Diagnose GUI problems
+- `python test_basic_gui.py` - Test basic PyQt5 functionality
 
 ### Installation Issues
 

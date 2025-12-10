@@ -13,6 +13,7 @@ warnings.filterwarnings('ignore', message='.*invalid value encountered.*')
 
 import sys
 import os
+import subprocess
 
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
@@ -36,14 +37,50 @@ if __name__ == '__main__':
     
     all_deps_ok = True
     
+    # Check NumPy with subprocess first to catch fatal errors
     try:
         print("  [1/5] Checking NumPy...", end=" ")
         sys.stdout.flush()
-        import numpy
-        print("✓")
-        sys.stdout.flush()
+        
+        # First try subprocess check to catch DLL/fatal errors
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, '-c', 'import numpy; print(numpy.__version__)'],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        
+        if result.returncode != 0:
+            print("✗")
+            print(f"\n  NumPy import failed in subprocess:")
+            if result.stderr:
+                print(f"  {result.stderr.strip()}")
+            print("\n  This usually indicates:")
+            print("    - Missing or incompatible DLL dependencies (Windows)")
+            print("    - Corrupted NumPy installation")
+            print("\n  Try fixing with:")
+            print("    pip uninstall numpy")
+            print("    pip install numpy")
+            print("\n  For detailed diagnosis, run:")
+            print("    python diagnose_numpy.py")
+            all_deps_ok = False
+        else:
+            # Subprocess succeeded, now import in main process
+            import numpy
+            print("✓")
+            sys.stdout.flush()
+            
+    except subprocess.TimeoutExpired:
+        print("✗")
+        print("\n  NumPy import timed out (possible infinite loop/hang)")
+        print("\n  Try reinstalling NumPy:")
+        print("    pip uninstall numpy")
+        print("    pip install numpy")
+        all_deps_ok = False
     except ImportError as e:
         print(f"✗\n  Error: {e}")
+        print("\n  Install NumPy with: pip install numpy")
         sys.stdout.flush()
         all_deps_ok = False
     except Exception as e:
@@ -56,11 +93,36 @@ if __name__ == '__main__':
     try:
         print("  [2/5] Checking PyQt5...", end=" ")
         sys.stdout.flush()
-        from PyQt5 import QtWidgets, QtCore, QtGui
-        print("✓")
+        
+        # Subprocess check for PyQt5
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, '-c', 'from PyQt5 import QtWidgets, QtCore, QtGui; print(QtCore.QT_VERSION_STR)'],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        
+        if result.returncode != 0:
+            print("✗")
+            print(f"\n  PyQt5 import failed:")
+            if result.stderr:
+                print(f"  {result.stderr.strip()}")
+            print("\n  Install PyQt5 with:")
+            print("    pip install PyQt5")
+            all_deps_ok = False
+        else:
+            from PyQt5 import QtWidgets, QtCore, QtGui
+            print("✓")
+            sys.stdout.flush()
+            
+    except subprocess.TimeoutExpired:
+        print("✗")
+        print("\n  PyQt5 import timed out")
+        all_deps_ok = False
     except ImportError as e:
         print(f"✗\n  Error: {e}")
-        print("\n  Please install PyQt5:")
+        print("\n  Install PyQt5 with:")
         print("    pip install PyQt5")
         all_deps_ok = False
     except Exception as e:
@@ -88,11 +150,42 @@ if __name__ == '__main__':
     try:
         print("  [4/5] Checking PyQtGraph OpenGL...", end=" ")
         sys.stdout.flush()
-        import pyqtgraph.opengl
-        print("✓")
+        
+        # Subprocess check for OpenGL
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, '-c', 'import pyqtgraph.opengl as gl'],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        
+        if result.returncode != 0:
+            print("✗")
+            print(f"\n  PyQtGraph OpenGL import failed:")
+            if result.stderr:
+                stderr_lower = result.stderr.lower()
+                print(f"  {result.stderr.strip()}")
+                
+                if 'no module named' in stderr_lower and 'opengl' in stderr_lower:
+                    print("\n  Install PyOpenGL with:")
+                    print("    pip install PyOpenGL PyOpenGL_accelerate")
+                else:
+                    print("\n  This might be an OpenGL driver or compatibility issue.")
+                    print("  Try running: python diagnose_gui_startup.py")
+            all_deps_ok = False
+        else:
+            import pyqtgraph.opengl
+            print("✓")
+            sys.stdout.flush()
+            
+    except subprocess.TimeoutExpired:
+        print("✗")
+        print("\n  PyQtGraph OpenGL import timed out")
+        all_deps_ok = False
     except ImportError as e:
         print(f"✗\n  Error: {e}")
-        print("\n  Please install PyOpenGL:")
+        print("\n  Install PyOpenGL with:")
         print("    pip install PyOpenGL PyOpenGL_accelerate")
         all_deps_ok = False
     except Exception as e:
