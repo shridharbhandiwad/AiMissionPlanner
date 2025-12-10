@@ -46,10 +46,10 @@ Or manually:
 ```batch
 pip uninstall -y numpy
 pip cache remove numpy
-pip install --only-binary :all: "numpy>=2.0.0,<3.0.0"
+pip install --only-binary :all: "numpy>=2.0.0,<2.3"
 ```
 
-**Note:** Python 3.12+ requires NumPy 2.x. Use `numpy==1.26.4` only if you're on Python 3.11 or earlier.
+**Note:** Python 3.12+ requires NumPy 2.x, and scipy 1.14.1 requires numpy<2.3. Use `numpy==1.26.4` only if you're on Python 3.11 or earlier.
 
 ### Fix 2: Install GUI Dependencies
 
@@ -126,7 +126,7 @@ python run_trajectory_gui.py
 2. Check your Python installation: `python --version`
 3. Try clearing ALL pip cache: `pip cache purge`
 4. Reinstall NumPy: 
-   - For Python 3.12+: `pip install --force-reinstall --no-cache-dir "numpy>=2.0.0,<3.0.0"`
+   - For Python 3.12+: `pip install --force-reinstall --no-cache-dir "numpy>=2.0.0,<2.3"`
    - For Python 3.11 or earlier: `pip install --force-reinstall --no-cache-dir numpy==1.26.4`
 
 ### If PyQt5 won't install:

@@ -126,7 +126,7 @@ pip uninstall -y matplotlib numpy pillow
 pip cache purge
 
 # Reinstall
-pip install --only-binary :all: "numpy>=2.0.0,<3.0.0"
+pip install --only-binary :all: "numpy>=2.0.0,<2.3"
 pip install --only-binary :all: matplotlib==3.9.0
 
 # Test
