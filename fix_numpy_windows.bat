@@ -44,12 +44,12 @@ echo.
 
 echo Step 4: Installing NumPy from official Windows wheel...
 echo This will download the proper Windows binary (not MINGW-W64 build)
-pip install --only-binary :all: numpy==1.26.4
+echo Note: Python 3.12+ requires NumPy 2.x
+pip install --only-binary :all: "numpy>=2.0.0,<3.0.0"
 if errorlevel 1 (
     echo.
-    echo ERROR: Failed to install NumPy with --only-binary flag
-    echo Trying with --prefer-binary instead...
-    pip install --prefer-binary numpy==1.26.4
+    echo WARNING: Failed with --only-binary, trying --prefer-binary...
+    pip install --prefer-binary "numpy>=2.0.0,<3.0.0"
     if errorlevel 1 (
         echo ERROR: Failed to install NumPy
         echo.

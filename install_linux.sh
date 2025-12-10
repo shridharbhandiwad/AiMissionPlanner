@@ -56,8 +56,8 @@ else
     # Install PyTorch
     pip install torch==2.9.1 torchvision==0.24.1
     
-    # Install remaining packages
-    pip install numpy==1.26.4 scipy==1.14.1 pandas==2.2.3 scikit-learn==1.5.2 \
+    # Install remaining packages (numpy 2.x for Python 3.12+)
+    pip install "numpy>=2.0.0,<3.0.0" scipy==1.14.1 pandas==2.2.3 scikit-learn==1.5.2 \
                 matplotlib==3.9.0 seaborn==0.13.0 plotly==5.24.0 tensorboard==2.18.0 \
                 tqdm==4.66.1 fastapi==0.115.0 uvicorn[standard]==0.30.0 pydantic==2.9.0 \
                 python-multipart==0.0.12 shapely==2.0.6 pytest==8.3.0
