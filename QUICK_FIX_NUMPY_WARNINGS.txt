@@ -1,0 +1,107 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                   NUMPY MINGW-W64 WARNINGS - QUICK FIX                     ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+PROBLEM: NumPy warnings when running data_generator.py on Windows
+────────────────────────────────────────────────────────────────────────────
+
+WARNING MESSAGES:
+  ⚠ Warning: Numpy built with MINGW-W64 on Windows 64 bits is experimental
+  ⚠ RuntimeWarning: invalid value encountered in exp2
+  ⚠ RuntimeWarning: invalid value encountered in nextafter
+  ⚠ RuntimeWarning: invalid value encountered in log10
+
+GOOD NEWS: These warnings don't affect functionality! ✓
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                             SOLUTION STATUS                                ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+✅ ALREADY FIXED IN CODE
+   The warnings are now automatically suppressed in src/data_generator.py
+   You can run the script normally and won't see these warnings!
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                           USAGE (PICK ONE)                                 ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+1. STANDARD (warnings already suppressed in code)
+   ─────────────────────────────────────────────
+   python src/data_generator.py
+
+
+2. WINDOWS BATCH SCRIPT (extra suppression)
+   ────────────────────────────────────────
+   run_data_generator.bat
+
+
+3. LINUX/MAC SHELL SCRIPT (extra suppression)
+   ──────────────────────────────────────────
+   ./run_data_generator.sh
+
+
+4. COMMAND LINE FLAG (manual override)
+   ───────────────────────────────────
+   python -W ignore src/data_generator.py
+
+
+5. ENVIRONMENT VARIABLE (manual override)
+   ──────────────────────────────────────
+   Windows CMD:       set PYTHONWARNINGS=ignore::RuntimeWarning
+   Windows PS:        $env:PYTHONWARNINGS="ignore::RuntimeWarning"
+   Linux/Mac:         export PYTHONWARNINGS=ignore::RuntimeWarning
+   
+   Then run:          python src/data_generator.py
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    PERMANENT FIX (PRODUCTION USE)                          ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+For production environments, reinstall NumPy from a stable source:
+
+A. CONDA (Most Reliable) ⭐
+   ────────────────────────
+   conda install numpy -c conda-forge
+
+
+B. OFFICIAL WHEELS
+   ───────────────
+   pip uninstall numpy
+   pip install numpy==1.26.4 --only-binary :all:
+
+
+C. DIFFERENT VERSION
+   ─────────────────
+   pip install numpy==1.24.3
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                         MORE INFORMATION                                   ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📚 Comprehensive Guide:     NUMPY_MINGW_WARNINGS_FIX.md
+📋 Implementation Summary:  NUMPY_WARNINGS_FIX_SUMMARY.md
+❓ General Troubleshooting: README.md (Troubleshooting section)
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                            KEY POINTS                                      ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+✓ Warnings are COSMETIC only - code works correctly
+✓ Already fixed in src/data_generator.py
+✓ No breaking changes to functionality
+✓ Multiple suppression methods available
+✓ Production users should use conda's NumPy build
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                           NEED HELP?                                       ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+Still seeing issues? Check:
+1. Make sure you're using the latest version of src/data_generator.py
+2. Read NUMPY_MINGW_WARNINGS_FIX.md for detailed solutions
+3. Check README.md troubleshooting section
+4. Open an issue on GitHub with your error message
+
+────────────────────────────────────────────────────────────────────────────
+Status: ✅ FIXED | Branch: cursor/generate-data-script-warnings-6e2e
+────────────────────────────────────────────────────────────────────────────
