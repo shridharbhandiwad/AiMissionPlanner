@@ -18,6 +18,10 @@ The following scripts now have automatic warning suppression:
 - ✅ `src/inference.py` - **NEW FIX**
 - ✅ `src/visualize.py` - **NEW FIX**
 - ✅ `src/model.py` - **NEW FIX**
+- ✅ `src/trajectory_gui.py` - **NEW FIX**
+
+### GUI Launcher Scripts
+- ✅ `run_trajectory_gui.py` - **NEW FIX**
 
 ### API Scripts (`api/`)
 - ✅ `api/app.py` - **NEW FIX**

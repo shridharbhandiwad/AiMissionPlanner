@@ -3,6 +3,14 @@
 Launcher script for 3D Trajectory Generator GUI
 """
 
+# Suppress NumPy MINGW-W64 warnings on Windows
+import warnings
+
+# Filter warnings before NumPy import to suppress MINGW-W64 build warnings
+warnings.filterwarnings('ignore', message='.*MINGW-W64.*')
+warnings.filterwarnings('ignore', category=RuntimeWarning, module='numpy')
+warnings.filterwarnings('ignore', message='.*invalid value encountered.*')
+
 import sys
 import os
 

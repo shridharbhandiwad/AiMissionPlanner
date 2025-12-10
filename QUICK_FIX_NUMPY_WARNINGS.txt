@@ -26,6 +26,8 @@ GOOD NEWS: These warnings don't affect functionality! ✓
    • src/inference.py
    • src/visualize.py
    • src/model.py
+   • src/trajectory_gui.py ⭐ NEW
+   • run_trajectory_gui.py ⭐ NEW
    • api/app.py
    
    You can run any script normally and won't see these warnings!

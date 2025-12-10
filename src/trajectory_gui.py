@@ -3,6 +3,14 @@
 PyQt5-based interactive GUI for generating and visualizing various trajectory types
 """
 
+# Suppress NumPy MINGW-W64 warnings on Windows
+import warnings
+
+# Filter warnings before NumPy import to suppress MINGW-W64 build warnings
+warnings.filterwarnings('ignore', message='.*MINGW-W64.*')
+warnings.filterwarnings('ignore', category=RuntimeWarning, module='numpy')
+warnings.filterwarnings('ignore', message='.*invalid value encountered.*')
+
 import sys
 import numpy as np
 from typing import List, Dict, Tuple, Optional

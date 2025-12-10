@@ -72,6 +72,8 @@ All Python scripts now automatically suppress these warnings before importing Nu
 - ✅ `src/inference.py` - Inference utilities
 - ✅ `src/visualize.py` - Visualization
 - ✅ `src/model.py` - Model definitions
+- ✅ `src/trajectory_gui.py` - Trajectory GUI
+- ✅ `run_trajectory_gui.py` - GUI launcher
 - ✅ `api/app.py` - API server
 
 You won't see NumPy warnings when running any of these scripts.
