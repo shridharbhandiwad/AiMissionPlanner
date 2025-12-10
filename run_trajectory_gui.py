@@ -32,67 +32,139 @@ if __name__ == '__main__':
     
     # Check dependencies
     print("Checking dependencies...")
+    print()
+    
+    all_deps_ok = True
+    
     try:
+        print("  [1/5] Checking NumPy...", end=" ")
+        sys.stdout.flush()
         import numpy
-        print("  ✓ NumPy installed")
+        print("✓")
     except ImportError as e:
-        print(f"  ✗ NumPy not found: {e}")
-        sys.exit(1)
+        print(f"✗\n  Error: {e}")
+        all_deps_ok = False
+    except Exception as e:
+        print(f"✗\n  Unexpected error: {type(e).__name__}: {e}")
+        all_deps_ok = False
     
     try:
+        print("  [2/5] Checking PyQt5...", end=" ")
+        sys.stdout.flush()
         from PyQt5 import QtWidgets, QtCore, QtGui
-        print("  ✓ PyQt5 installed")
+        print("✓")
     except ImportError as e:
-        print(f"  ✗ PyQt5 not found: {e}")
-        print("\nPlease install PyQt5:")
-        print("  pip install PyQt5")
-        input("\nPress Enter to exit...")
-        sys.exit(1)
+        print(f"✗\n  Error: {e}")
+        print("\n  Please install PyQt5:")
+        print("    pip install PyQt5")
+        all_deps_ok = False
+    except Exception as e:
+        print(f"✗\n  Unexpected error: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        all_deps_ok = False
     
     try:
+        print("  [3/5] Checking PyQtGraph...", end=" ")
+        sys.stdout.flush()
         import pyqtgraph
-        print("  ✓ PyQtGraph installed")
+        print("✓")
     except ImportError as e:
-        print(f"  ✗ PyQtGraph not found: {e}")
-        print("\nPlease install PyQtGraph:")
-        print("  pip install pyqtgraph")
-        input("\nPress Enter to exit...")
-        sys.exit(1)
+        print(f"✗\n  Error: {e}")
+        print("\n  Please install PyQtGraph:")
+        print("    pip install pyqtgraph")
+        all_deps_ok = False
+    except Exception as e:
+        print(f"✗\n  Unexpected error: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        all_deps_ok = False
     
     try:
+        print("  [4/5] Checking PyQtGraph OpenGL...", end=" ")
+        sys.stdout.flush()
         import pyqtgraph.opengl
-        print("  ✓ PyQtGraph OpenGL support")
+        print("✓")
     except ImportError as e:
-        print(f"  ✗ PyQtGraph OpenGL not found: {e}")
-        print("\nPlease install PyOpenGL:")
-        print("  pip install PyOpenGL PyOpenGL_accelerate")
-        input("\nPress Enter to exit...")
-        sys.exit(1)
+        print(f"✗\n  Error: {e}")
+        print("\n  Please install PyOpenGL:")
+        print("    pip install PyOpenGL PyOpenGL_accelerate")
+        all_deps_ok = False
+    except Exception as e:
+        print(f"✗\n  Unexpected error during OpenGL import: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        print("\n  This might be an OpenGL driver or compatibility issue.")
+        print("  Try running: python diagnose_gui_startup.py")
+        all_deps_ok = False
     
     try:
+        print("  [5/5] Checking SciPy...", end=" ")
+        sys.stdout.flush()
         from scipy.interpolate import CubicSpline
-        print("  ✓ SciPy installed")
+        print("✓")
     except ImportError as e:
-        print(f"  ✗ SciPy not found: {e}")
-        print("\nPlease install SciPy:")
-        print("  pip install scipy")
+        print(f"✗\n  Error: {e}")
+        print("\n  Please install SciPy:")
+        print("    pip install scipy")
+        all_deps_ok = False
+    except Exception as e:
+        print(f"✗\n  Unexpected error: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        all_deps_ok = False
+    
+    print()
+    
+    if not all_deps_ok:
+        print("="*60)
+        print("DEPENDENCY CHECK FAILED")
+        print("="*60)
+        print("\nSome dependencies are missing or not working correctly.")
+        print("\nTo diagnose the issue, run:")
+        print("  python diagnose_gui_startup.py")
+        print("\nTo test basic PyQt5 functionality, run:")
+        print("  python test_basic_gui.py")
+        print("\n" + "="*60)
         input("\nPress Enter to exit...")
         sys.exit(1)
     
-    print("\nAll dependencies found!")
-    print("\nInitializing GUI...")
+    print("All dependencies found!")
+    print()
+    print("Initializing GUI...")
+    print("  - Importing trajectory_gui module...")
+    sys.stdout.flush()
     
     try:
         from trajectory_gui import main
+        print("  - Module imported successfully")
+        print("  - Starting main GUI application...")
+        sys.stdout.flush()
         main()
+    except KeyboardInterrupt:
+        print("\n\nApplication interrupted by user.")
+        sys.exit(0)
+    except SystemExit as e:
+        if e.code == 0:
+            print("\nApplication closed normally.")
+        raise
     except Exception as e:
         print(f"\n{'='*60}")
         print("ERROR: Failed to start GUI")
         print(f"{'='*60}")
-        print(f"\nError details: {e}")
+        print(f"\nError type: {type(e).__name__}")
+        print(f"Error details: {e}")
         import traceback
         print("\nFull traceback:")
         traceback.print_exc()
+        print(f"\n{'='*60}")
+        print("\nPossible causes:")
+        print("  1. OpenGL/graphics driver issue")
+        print("  2. Display environment not configured (Linux)")
+        print("  3. Missing Qt platform plugin")
+        print("  4. Incompatible PyQt5/PyQtGraph versions")
+        print("\nFor more diagnostics, run:")
+        print("  python diagnose_gui_startup.py")
         print(f"\n{'='*60}")
         input("\nPress Enter to exit...")
         sys.exit(1)
