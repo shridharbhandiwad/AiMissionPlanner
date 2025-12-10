@@ -19,9 +19,9 @@ matplotlib==3.9.0
 seaborn==0.13.0
 plotly==5.24.0
 
-# Model export and inference - Using older versions with better Windows wheel support
-onnx==1.16.1
-onnxruntime==1.19.2
+# Model export and inference - Python 3.13+ compatible versions
+onnx==1.18.0
+onnxruntime==1.20.0
 
 # Training utilities
 tensorboard==2.18.0

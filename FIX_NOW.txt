@@ -1,0 +1,77 @@
+================================================================================
+                     ONNX INSTALLATION FIX - COPY THIS!
+================================================================================
+
+YOUR PROBLEM: Python 3.13+ doesn't have pre-built wheels for ONNX 1.16.1
+
+YOUR SOLUTION: Use ONNX 1.18.0 or later (compatible with Python 3.13+)
+
+================================================================================
+                           COPY AND RUN THIS COMMAND:
+================================================================================
+
+python -m pip install --upgrade pip setuptools wheel && pip uninstall -y onnx onnxruntime && pip install --only-binary :all: onnx==1.18.0 onnxruntime==1.20.0
+
+================================================================================
+                              VERIFY IT WORKED:
+================================================================================
+
+python -c "import onnx, onnxruntime; print('ONNX:', onnx.__version__); print('ONNX Runtime:', onnxruntime.__version__); print('Success!')"
+
+================================================================================
+                           ALTERNATIVE VERSIONS:
+================================================================================
+
+If 1.18.0 doesn't work, try these in order:
+
+1. Latest stable:
+   pip install --only-binary :all: onnx==1.20.0 onnxruntime==1.20.0
+
+2. Alternative:
+   pip install --only-binary :all: onnx==1.19.0 onnxruntime==1.20.0
+
+3. No version constraint (gets latest available):
+   pip install --only-binary :all: onnx onnxruntime
+
+================================================================================
+                               WHY THIS WORKS:
+================================================================================
+
+- Python 3.13 is new (released Oct 2023)
+- ONNX 1.16.1 was released BEFORE Python 3.13 existed
+- Only ONNX 1.18.0+ have wheels built for Python 3.13
+- Using --only-binary ensures you get pre-built wheels (no compilation)
+
+================================================================================
+                            UPDATED PROJECT FILES:
+================================================================================
+
+✅ requirements.txt - Now uses onnx==1.18.0
+✅ requirements-windows.txt - Now uses onnx==1.18.0  
+✅ fix_onnx_ultimate.py - Prioritizes 1.18.0+ for Python 3.13
+✅ fix_onnx_windows.bat - Uses 1.18.0+ by default
+
+================================================================================
+                             AUTOMATED FIX SCRIPTS:
+================================================================================
+
+1. Windows users:
+   fix_onnx_windows.bat
+
+2. Any platform (Python script):
+   python fix_onnx_ultimate.py
+
+3. Conda users (most reliable):
+   fix_onnx_conda.bat
+
+================================================================================
+                              MORE INFORMATION:
+================================================================================
+
+See PYTHON_3.13_ONNX_FIX.md for:
+- Detailed explanation
+- Version compatibility matrix
+- Alternative solutions (Conda, WSL2, downgrade Python)
+- Test scripts
+
+================================================================================
