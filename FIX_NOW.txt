@@ -1,0 +1,83 @@
+================================================================================
+                    IMMEDIATE FIX FOR GUI ISSUES
+================================================================================
+
+YOUR ISSUE:
+-----------
+✗ NumPy has MINGW-W64 experimental build warnings
+✗ PyQt5 is not installed (ModuleNotFoundError)
+✗ PyQtGraph is not installed (ModuleNotFoundError)
+✗ PyOpenGL is not installed
+
+THE FIX:
+--------
+
+STEP 1: Make sure you're in your virtual environment
+
+    D:\Zoppler Projects\AiMissionPlanner> venv\Scripts\activate
+
+    You should see (venv) at the start of your command prompt.
+
+STEP 2: Run the fix script
+
+    (venv) D:\Zoppler Projects\AiMissionPlanner> fix_all_dependencies.bat
+
+    This will:
+    ✓ Reinstall NumPy with the correct Windows binary (no MINGW-W64)
+    ✓ Install PyQt5, PyQtGraph, and PyOpenGL
+    ✓ Verify everything works
+
+STEP 3: Run the GUI
+
+    (venv) D:\Zoppler Projects\AiMissionPlanner> python run_trajectory_gui.py
+
+    The GUI should now start without errors!
+
+================================================================================
+
+ALTERNATIVE FIXES:
+-----------------
+
+If you want to fix issues individually:
+
+    1. Fix NumPy only:        fix_numpy_windows.bat
+    2. Fix GUI packages only: fix_gui_dependencies.bat
+
+Or if you want to reinstall everything from scratch:
+
+    1. Deactivate:   deactivate
+    2. Delete venv:  rmdir /s /q venv
+    3. Reinstall:    install_windows.bat
+    4. Run GUI:      python run_trajectory_gui.py
+
+================================================================================
+
+DOCUMENTATION:
+-------------
+
+    WINDOWS_GUI_FIX.md       - Detailed Windows GUI fix guide
+    START_HERE.md            - Complete getting started guide
+    TROUBLESHOOTING.md       - All troubleshooting information
+
+================================================================================
+
+QUICK HELP:
+----------
+
+Q: How do I know if I'm in the virtual environment?
+A: Look for (venv) at the start of your command prompt
+
+Q: What if the fix script fails?
+A: See WINDOWS_GUI_FIX.md for alternative solutions
+
+Q: What Python version should I use?
+A: Python 3.9, 3.10, 3.11, or 3.12 (NOT 3.13)
+
+Q: Do I need Visual C++ Redistributables?
+A: Probably yes. Download from: https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+================================================================================
+
+                    RUN THIS NOW: fix_all_dependencies.bat
+
+================================================================================
