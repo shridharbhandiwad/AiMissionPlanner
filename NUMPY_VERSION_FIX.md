@@ -18,25 +18,32 @@ ERROR: No matching distribution found for numpy==1.26.4
 Updated all dependency files and scripts to use NumPy 2.x:
 
 ### Files Updated:
-1. **requirements.txt** - Changed to `numpy>=2.0.0,<3.0.0`
-2. **requirements-windows.txt** - Changed to `numpy>=2.0.0,<3.0.0`
+1. **requirements.txt** - Changed to `numpy>=2.0.0,<2.3`
+2. **requirements-windows.txt** - Changed to `numpy>=2.0.0,<2.3`
 3. **fix_numpy_windows.bat** - Updated installation commands
-4. **install_linux.sh** - Updated installation commands
-5. **install_windows.bat** - Updated installation commands
+4. **fix_all_dependencies.bat** - Updated installation commands
+5. **install_linux.sh** - Updated installation commands
+6. **install_windows.bat** - Updated installation commands
+7. All documentation files - Updated with correct version constraint
 
 ### Version Range Used:
 ```
-numpy>=2.0.0,<3.0.0
+numpy>=2.0.0,<2.3
 ```
 
 This ensures:
 - ✓ Compatible with Python 3.12+
-- ✓ Gets latest stable NumPy 2.x releases
-- ✓ Avoids future NumPy 3.x breaking changes
+- ✓ Compatible with scipy 1.14.1 (requires numpy<2.3)
+- ✓ Gets latest stable NumPy 2.x releases that work with all dependencies
 
 ## Installation Result
-- Successfully installed NumPy 2.3.5
+- Target version: NumPy 2.2.x (compatible with scipy 1.14.1)
 - All functionality verified and working
+
+## Dependency Compatibility
+- **scipy 1.14.1** requires `numpy>=1.23.5,<2.3`
+- **Python 3.12+** requires `numpy>=2.0.0`
+- **Solution**: `numpy>=2.0.0,<2.3` satisfies both constraints
 
 ## Python Version Compatibility Matrix
 

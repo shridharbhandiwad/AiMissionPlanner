@@ -1,17 +1,13 @@
 @echo off
-REM Fix for NumPy MINGW-W64 warnings on Windows
-REM This script reinstalls NumPy with the proper Windows binary
+REM Fix for NumPy/SciPy version conflict on Windows
+REM This script resolves the incompatibility between numpy 2.3.5 and scipy 1.14.1
 
 echo ================================================
-echo NumPy Windows Fix Script
+echo NumPy/SciPy Compatibility Fix
 echo ================================================
 echo.
-echo This script fixes the NumPy MINGW-W64 experimental build warnings.
-echo.
-echo The issue: NumPy was built with MINGW-W64 compiler which is
-echo experimental and causes crashes on Windows.
-echo.
-echo The solution: Reinstall NumPy using the official Windows binary.
+echo Issue: scipy 1.14.1 requires numpy^<2.3, but numpy 2.3.5 was installed
+echo Solution: Reinstall numpy with version constraint compatible with scipy
 echo.
 
 REM Check if we're in a virtual environment
@@ -39,12 +35,12 @@ pip uninstall -y numpy
 echo.
 
 echo Step 3: Clearing pip cache for NumPy...
-pip cache remove numpy
+pip cache remove numpy 2>nul
 echo.
 
-echo Step 4: Installing NumPy from official Windows wheel...
-echo This will download the proper Windows binary (not MINGW-W64 build)
-echo Note: Python 3.12+ requires NumPy 2.x, constrained for scipy compatibility
+echo Step 4: Reinstalling numpy (ensuring Windows binary)...
+echo Installing numpy version compatible with scipy 1.14.1
+echo Version constraint: numpy^>=2.0.0,^<2.3
 pip install --only-binary :all: "numpy>=2.0.0,<2.3"
 if errorlevel 1 (
     echo.
@@ -54,7 +50,7 @@ if errorlevel 1 (
         echo ERROR: Failed to install NumPy
         echo.
         echo Try installing manually:
-        echo   pip install numpy
+        echo   pip install "numpy>=2.0.0,<2.3"
         pause
         exit /b 1
     )
@@ -62,11 +58,11 @@ if errorlevel 1 (
 echo   ✓ NumPy installed successfully
 echo.
 
-echo Step 5: Verifying NumPy installation...
-python -c "import numpy; print('NumPy version:', numpy.__version__); print('NumPy file location:', numpy.__file__); import numpy.core._multiarray_umath; print('✓ NumPy working correctly!')"
+echo Step 5: Verifying installations...
+python -c "import numpy; import scipy; print('NumPy version:', numpy.__version__); print('SciPy version:', scipy.__version__); print(''); print('✓ Both packages working correctly!')"
 if errorlevel 1 (
     echo.
-    echo ERROR: NumPy verification failed!
+    echo ERROR: Verification failed!
     echo.
     echo The installation might be corrupted. Try:
     echo   1. Close all Python processes
@@ -78,10 +74,10 @@ if errorlevel 1 (
 echo.
 
 echo ================================================
-echo NumPy Fixed Successfully!
+echo Fix Applied Successfully!
 echo ================================================
 echo.
-echo NumPy should now work without MINGW-W64 warnings.
+echo NumPy and SciPy are now compatible.
 echo.
 echo You can now run the trajectory GUI:
 echo   python run_trajectory_gui.py

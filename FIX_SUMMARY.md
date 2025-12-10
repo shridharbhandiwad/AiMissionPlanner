@@ -24,10 +24,10 @@ ERROR: No matching distribution found for numpy==1.26.4
 ### Files Updated (9 files total):
 
 1. **requirements.txt**
-   - Changed: `numpy==1.26.4` → `numpy>=2.0.0,<3.0.0`
+   - Changed: `numpy==1.26.4` → `numpy>=2.0.0,<2.3`
 
 2. **requirements-windows.txt**
-   - Changed: `numpy==1.26.4` → `numpy>=2.0.0,<3.0.0`
+   - Changed: `numpy==1.26.4` → `numpy>=2.0.0,<2.3`
 
 3. **fix_numpy_windows.bat**
    - Updated installation command to use NumPy 2.x

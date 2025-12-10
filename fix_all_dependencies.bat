@@ -57,11 +57,11 @@ pip cache remove numpy 2>nul
 echo.
 
 echo Step 1.4: Installing NumPy from official Windows wheel...
-echo Note: Python 3.12+ requires NumPy 2.x
-pip install --only-binary :all: "numpy>=2.0.0,<3.0.0"
+echo Note: Python 3.12+ requires NumPy 2.x, constrained for scipy compatibility
+pip install --only-binary :all: "numpy>=2.0.0,<2.3"
 if errorlevel 1 (
     echo WARNING: Failed with --only-binary, trying --prefer-binary...
-    pip install --prefer-binary "numpy>=2.0.0,<3.0.0"
+    pip install --prefer-binary "numpy>=2.0.0,<2.3"
     if errorlevel 1 (
         echo ERROR: Failed to install NumPy
         pause

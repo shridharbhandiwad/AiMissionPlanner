@@ -44,7 +44,7 @@ echo.
 
 echo Step 4: Reinstalling numpy (ensuring Windows binary)...
 pip uninstall -y numpy
-pip install --only-binary :all: --force-reinstall "numpy>=2.0.0,<3.0.0"
+pip install --only-binary :all: --force-reinstall "numpy>=2.0.0,<2.3"
 if errorlevel 1 (
     echo ERROR: Failed to install numpy
     echo.
