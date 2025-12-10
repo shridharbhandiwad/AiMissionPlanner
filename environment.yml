@@ -1,0 +1,48 @@
+name: missionplannerenv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip>=24.0
+  - pip:
+    # Core ML/DL dependencies
+    - torch==2.9.1
+    - torchvision==0.24.1
+    - numpy==1.26.4
+    - scipy==1.14.1
+    
+    # Data processing
+    - pandas==2.2.3
+    - scikit-learn==1.5.2
+    
+    # Visualization
+    - matplotlib==3.9.0
+    - seaborn==0.13.0
+    - plotly==5.24.0
+    
+    # Model export and inference
+    - onnx==1.18.0
+    - onnxruntime==1.20.0
+    
+    # Training utilities
+    - tensorboard==2.18.0
+    - tqdm==4.66.1
+    
+    # API service (optional)
+    - fastapi==0.115.0
+    - uvicorn[standard]==0.30.0
+    - pydantic==2.9.0
+    - python-multipart==0.0.12
+    
+    # Trajectory generation algorithms
+    - shapely==2.0.6
+    
+    # Testing
+    - pytest==8.3.0
+    
+    # GUI for 3D Trajectory Generation
+    - PyQt5==5.15.11
+    - PyQtGraph==0.13.7
+    - PyOpenGL==3.1.7
+    - PyOpenGL_accelerate

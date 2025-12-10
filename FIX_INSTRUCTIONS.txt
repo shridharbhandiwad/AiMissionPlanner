@@ -1,0 +1,64 @@
+================================================================================
+TRAJECTORY GUI - DEPENDENCY FIX INSTRUCTIONS
+================================================================================
+
+PROBLEM:
+--------
+Missing packages: NumPy, SciPy, PyQt5, PyQtGraph, PyOpenGL
+
+SOLUTION (Run on your Windows machine):
+----------------------------------------
+
+1. Open Command Prompt
+
+2. Navigate to your project:
+   cd "D:\Zoppler Projects\AiMissionPlanner"
+
+3. Activate conda environment:
+   conda activate missionplannerenv
+
+4. Install missing packages:
+   pip install numpy scipy PyQt5 PyQtGraph PyOpenGL PyOpenGL_accelerate
+
+5. Verify installation:
+   python diagnose_gui_startup.py
+
+6. Launch GUI:
+   python run_trajectory_gui_safe.py
+
+================================================================================
+
+AUTOMATED FIX:
+--------------
+Just run:
+   fix_dependencies.bat
+
+This automatically installs everything and verifies it works.
+
+================================================================================
+
+WHAT TO EXPECT:
+---------------
+After running the commands above:
+  ✓ NumPy, SciPy, PyQt5, PyQtGraph, PyOpenGL will be installed
+  ✓ Diagnostic script will show all checks passing
+  ✓ GUI will launch with 3D visualization
+  ✓ You can generate 12 different trajectory types
+
+================================================================================
+
+DETAILED GUIDES:
+----------------
+  • QUICK_FIX_DEPENDENCIES.md    - Fast troubleshooting
+  • DEPENDENCY_FIX_COMPLETE.md   - Comprehensive guide
+  • DEPENDENCY_FIX_GUIDE.md      - Detailed instructions
+  • GUI_TROUBLESHOOTING.md       - GUI-specific issues
+
+================================================================================
+
+INSTALLATION TIME:
+------------------
+  Download size: ~132 MB
+  Time: 2-5 minutes (depending on internet speed)
+
+================================================================================
