@@ -258,11 +258,24 @@ View results:
 
 ## 🐛 Troubleshooting
 
-### GUI won't start?
+### GUI Window Not Opening? (UPDATED!)
+
+**NEW: Enhanced diagnostics added!** If the GUI doesn't appear:
+
+#### Step 1: Run Diagnostic Tests
+```bash
+# Test basic GUI display
+python test_gui_display.py
+
+# Test OpenGL 3D support
+python test_opengl_display.py
+```
+
+#### Step 2: Quick Fixes
 
 **Problem**: Missing dependencies
 ```bash
-pip install PyQt5 PyQtGraph PyOpenGL
+pip install PyQt5 PyQtGraph PyOpenGL PyOpenGL_accelerate scipy
 ```
 
 **Problem**: No display (Linux servers)
@@ -270,22 +283,32 @@ pip install PyQt5 PyQtGraph PyOpenGL
 xvfb-run python run_trajectory_gui.py
 ```
 
-### 3D view is black?
-
-**Solution**: Update graphics drivers or install:
+**Problem**: 3D view is black or window closes immediately
 ```bash
+# Update graphics drivers
+# Install accelerate package
 pip install PyOpenGL-accelerate
 ```
 
-### Import errors?
-
-**Solution**: Run from workspace directory:
+**Problem**: Import errors
 ```bash
+# Run from workspace directory
 cd /workspace
 python run_trajectory_gui.py
 ```
 
-**See `TEST_GUI_INSTALLATION.md` for complete troubleshooting**
+#### Step 3: Detailed Help
+
+**📋 See these NEW troubleshooting guides:**
+- **`GUI_FIX_SUMMARY.md`** - Quick fix summary and next steps
+- **`GUI_TROUBLESHOOTING.md`** - Complete troubleshooting guide
+- **`TEST_GUI_INSTALLATION.md`** - Installation testing
+
+The updated launcher now includes:
+- ✅ Automatic dependency checking
+- ✅ Detailed error messages
+- ✅ Progress indicators
+- ✅ Diagnostic tools
 
 ---
 
@@ -318,6 +341,8 @@ python run_trajectory_gui.py
 | Document | Purpose | Read Time |
 |----------|---------|-----------|
 | **START_HERE_GUI.md** | You are here! | 5 min |
+| **GUI_FIX_SUMMARY.md** | ⭐ GUI not opening? Start here! | 5 min |
+| **GUI_TROUBLESHOOTING.md** | Complete troubleshooting guide | 15 min |
 | **TRAJECTORY_GUI_QUICK_START.md** | Quick tutorial | 10 min |
 | **TRAJECTORY_GUI_README.md** | Complete guide | 30 min |
 | **TEST_GUI_INSTALLATION.md** | Testing & troubleshooting | 15 min |

@@ -1192,16 +1192,35 @@ class TrajectoryGeneratorGUI(QMainWindow):
 
 def main():
     """Main function"""
-    app = QApplication(sys.argv)
-    
-    # Set style
-    app.setStyle('Fusion')
-    
-    # Create and show GUI
-    gui = TrajectoryGeneratorGUI()
-    gui.show()
-    
-    sys.exit(app.exec_())
+    try:
+        # Create application
+        app = QApplication(sys.argv)
+        
+        # Set style
+        app.setStyle('Fusion')
+        
+        print("Creating GUI window...")
+        
+        # Create and show GUI
+        gui = TrajectoryGeneratorGUI()
+        
+        print("Showing window...")
+        gui.show()
+        gui.raise_()
+        gui.activateWindow()
+        
+        print("GUI window created successfully!")
+        print("Starting event loop...\n")
+        
+        # Start event loop
+        sys.exit(app.exec_())
+        
+    except Exception as e:
+        print(f"\nFATAL ERROR in main():")
+        print(f"  {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
 
 
 if __name__ == '__main__':
