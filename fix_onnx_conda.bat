@@ -43,9 +43,9 @@ if %ERRORLEVEL% EQU 0 (
 )
 echo.
 
-REM Create new conda environment with Python 3.11
+REM Create new conda environment with Python 3.11 or 3.13
 echo [3/6] Creating conda environment with Python 3.11...
-echo This is the most compatible Python version for ONNX
+echo (Python 3.11 and 3.13 are both compatible with latest ONNX)
 conda create -n trajectory python=3.11 -y
 if %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Failed to create conda environment

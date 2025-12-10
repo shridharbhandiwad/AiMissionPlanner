@@ -220,11 +220,15 @@ def method_pip_versions(info):
     print("\n  Method: pip with pre-built wheels")
     
     # Extended list of version combinations
+    # For Python 3.13+, only versions 1.18.0+ have pre-built wheels
     versions = [
         # (onnx_version, runtime_version, description)
-        ("1.17.0", "1.20.0", "Latest stable"),
-        ("1.16.2", "1.19.2", "Latest 1.16"),
-        ("1.16.1", "1.19.2", "Stable 1.16.1"),
+        ("1.20.0", "1.20.0", "Latest stable (Python 3.13+)"),
+        ("1.19.1", "1.20.0", "Stable 1.19.1 (Python 3.13+)"),
+        ("1.19.0", "1.20.0", "Stable 1.19.0 (Python 3.13+)"),
+        ("1.18.0", "1.20.0", "Stable 1.18.0 (Python 3.13+)"),
+        ("1.16.2", "1.19.2", "Latest 1.16 (Python 3.12 and below)"),
+        ("1.16.1", "1.19.2", "Stable 1.16.1 (Python 3.12 and below)"),
         ("1.16.0", "1.19.0", "Stable 1.16.0"),
         ("1.15.0", "1.18.1", "Previous stable"),
         ("1.15.0", "1.17.1", "1.15 + compatible runtime"),
@@ -237,12 +241,9 @@ def method_pip_versions(info):
         ("1.11.0", "1.13.1", "Older stable 1.11"),
     ]
     
-    # For Python 3.13+, try newer versions first
+    # For Python 3.13+, filter to only compatible versions
     if info['python_version_tuple'][1] >= 13:
-        versions = [
-            ("1.17.0", "1.20.1", "Python 3.13 compatible"),
-            ("1.16.2", "1.20.0", "Latest with 3.13 support"),
-        ] + versions
+        versions = [v for v in versions if float(v[0].split('.')[1]) >= 18]
     
     for onnx_ver, runtime_ver, desc in versions:
         print(f"\n  Trying: {desc} (ONNX {onnx_ver} + Runtime {runtime_ver})")

@@ -72,12 +72,13 @@ pip uninstall -y onnx onnxruntime 2>nul
 echo.
 
 echo Step 3: Installing ONNX with pre-built wheels...
-echo Attempting to install ONNX 1.16.1 and ONNXRuntime 1.19.2
+echo Attempting to install ONNX 1.18.0 and ONNXRuntime 1.20.0
+echo (Compatible with Python 3.13+)
 echo.
 
 REM Try --only-binary first (most reliable)
 echo Method 1: Installing with --only-binary flag...
-pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
+pip install --only-binary :all: onnx==1.18.0 onnxruntime==1.20.0
 if errorlevel 1 (
     echo.
     echo Method 1 failed. Trying Method 2...
@@ -85,15 +86,15 @@ if errorlevel 1 (
     
     REM Try --prefer-binary
     echo Method 2: Installing with --prefer-binary flag...
-    pip install --prefer-binary onnx==1.16.1 onnxruntime==1.19.2
+    pip install --prefer-binary onnx==1.18.0 onnxruntime==1.20.0
     if errorlevel 1 (
         echo.
         echo Method 2 failed. Trying Method 3...
         echo.
         
-        REM Try older version with better wheel coverage
-        echo Method 3: Installing older version (1.15.0) with better wheel coverage...
-        pip install --only-binary :all: onnx==1.15.0 onnxruntime==1.16.3
+        REM Try alternative newer version
+        echo Method 3: Installing alternative version (1.19.0)...
+        pip install --only-binary :all: onnx==1.19.0 onnxruntime==1.20.0
         if errorlevel 1 (
             echo.
             echo ================================================
@@ -101,13 +102,15 @@ if errorlevel 1 (
             echo ================================================
             echo.
             echo This usually means:
-            echo 1. Your Python version is too new (3.13+) or too old (^<3.8)
+            echo 1. Your Python version is too old (^<3.8)
             echo 2. Your platform is not supported
             echo 3. Internet connection issues
             echo.
+            echo Note: Python 3.13+ requires ONNX 1.18.0 or later
+            echo.
             echo Recommended solutions:
             echo.
-            echo A. Use Python 3.11 or 3.10 (best compatibility)
+            echo A. Use Python 3.10, 3.11, or 3.13 (best compatibility)
             echo    Download from: https://www.python.org/
             echo.
             echo B. Use Anaconda/Miniconda:
@@ -120,15 +123,15 @@ if errorlevel 1 (
             pause
             exit /b 1
         )
-        echo ✓ ONNX 1.15.0 installed successfully!
-        set ONNX_VERSION=1.15.0
+        echo ✓ ONNX 1.19.0 installed successfully!
+        set ONNX_VERSION=1.19.0
     ) else (
-        echo ✓ ONNX 1.16.1 installed successfully!
-        set ONNX_VERSION=1.16.1
+        echo ✓ ONNX 1.18.0 installed successfully!
+        set ONNX_VERSION=1.18.0
     )
 ) else (
-    echo ✓ ONNX 1.16.1 installed successfully!
-    set ONNX_VERSION=1.16.1
+    echo ✓ ONNX 1.18.0 installed successfully!
+    set ONNX_VERSION=1.18.0
 )
 echo.
 
