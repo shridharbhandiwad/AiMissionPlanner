@@ -271,6 +271,16 @@ python src/data_generator.py
 
 This generates 50,000 trajectories and saves to `data/trajectories.npz` (~5-10 minutes).
 
+**Windows Users**: If you see NumPy MINGW-W64 warnings, you can use the provided batch script:
+```bash
+run_data_generator.bat
+```
+
+**Linux/Mac Users**: Use the shell script for a cleaner output:
+```bash
+./run_data_generator.sh
+```
+
 ### Step 2: Train Model
 
 ```bash
@@ -697,6 +707,24 @@ pip install --only-binary :all: onnx==1.16.1 onnxruntime==1.19.2
 
 # Solution 3: See comprehensive guide
 # Read ONNX_INSTALLATION_FIX.md for detailed troubleshooting
+```
+
+**Issue**: NumPy MINGW-W64 warnings on Windows
+```
+Warning: Numpy built with MINGW-W64 on Windows 64 bits is experimental...
+RuntimeWarning: invalid value encountered in exp2
+```
+```bash
+# Solution: These warnings are now automatically suppressed in the code
+# The script will run normally without displaying these warnings
+
+# Alternative: Run with Python warning suppression flag
+python -W ignore src/data_generator.py
+
+# Or use the provided batch script (Windows)
+run_data_generator.bat
+
+# For more details, see NUMPY_MINGW_WARNINGS_FIX.md
 ```
 
 **Issue**: Package version conflicts
