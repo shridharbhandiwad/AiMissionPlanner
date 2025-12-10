@@ -14,7 +14,24 @@ Your application was exiting silently during the NumPy dependency check. This is
 
 ## 🔧 Quick Fix (Start Here!)
 
-Run this interactive tool to diagnose and fix issues:
+### Windows Users (RECOMMENDED)
+
+If you're getting **NumPy MINGW-W64 warnings** or **missing PyQt5/PyQtGraph** errors, run:
+
+```batch
+fix_all_dependencies.bat
+```
+
+This will:
+- ✓ Fix NumPy MINGW-W64 experimental build issues
+- ✓ Install/fix PyQt5, PyQtGraph, PyOpenGL
+- ✓ Verify all installations work correctly
+
+**See full Windows instructions:** `WINDOWS_GUI_FIX.md`
+
+### Alternative (All Platforms)
+
+Run this interactive Python tool to diagnose and fix issues:
 
 ```bash
 python quick_fix.py
@@ -112,14 +129,36 @@ run_trajectory_gui.bat
 
 ### Windows Users
 
-If you see NumPy errors:
+#### If you see NumPy MINGW-W64 warnings or missing GUI packages:
+
+**BEST SOLUTION - Run the all-in-one fix:**
+```batch
+fix_all_dependencies.bat
+```
+
+**Or fix individually:**
+
+1. **Fix NumPy MINGW-W64 issue:**
+   ```batch
+   fix_numpy_windows.bat
+   ```
+
+2. **Install GUI packages:**
+   ```batch
+   fix_gui_dependencies.bat
+   ```
+
+3. **Full documentation:**
+   See `WINDOWS_GUI_FIX.md` for detailed instructions
+
+#### If you see other NumPy errors:
 
 1. **Install Microsoft Visual C++ Redistributables:**
    - Download: https://aka.ms/vs/17/release/vc_redist.x64.exe
    - Install and restart your computer
    - Run: `python fix_numpy.py`
 
-2. **Or use the quick fix:**
+2. **Or use the Python quick fix:**
    ```bash
    python quick_fix.py
    ```

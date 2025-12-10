@@ -95,24 +95,45 @@ if errorlevel 1 (
 )
 echo.
 
+REM Install GUI packages
+echo Installing GUI packages (PyQt5, PyQtGraph, PyOpenGL)...
+pip install PyQt5==5.15.11 PyQtGraph==0.13.7 PyOpenGL==3.1.7 PyOpenGL_accelerate==3.1.7
+if errorlevel 1 (
+    echo WARNING: Failed to install GUI packages with accelerate
+    echo Trying without PyOpenGL_accelerate...
+    pip install PyQt5==5.15.11 PyQtGraph==0.13.7 PyOpenGL==3.1.7
+    if errorlevel 1 (
+        echo ERROR: Failed to install GUI packages
+        echo The GUI will not work without these packages.
+        pause
+        exit /b 1
+    )
+)
+echo.
+
 echo ================================================
 echo Installation completed successfully!
 echo ================================================
 echo.
 echo Verifying installation...
-python -c "import torch; import onnx; import onnxruntime; print('PyTorch:', torch.__version__); print('ONNX:', onnx.__version__); print('ONNX Runtime:', onnxruntime.__version__); print('\n✓ All packages installed successfully!')"
+python -c "import torch; import onnx; import onnxruntime; from PyQt5 import QtCore; import pyqtgraph; print('PyTorch:', torch.__version__); print('ONNX:', onnx.__version__); print('ONNX Runtime:', onnxruntime.__version__); print('PyQt5:', QtCore.QT_VERSION_STR); print('PyQtGraph:', pyqtgraph.__version__); print('\n✓ All packages installed successfully!')"
 if errorlevel 1 (
     echo.
     echo WARNING: Verification failed. Some packages may not be installed correctly.
-    echo Try running: python -c "import sys; print(sys.version)"
+    echo.
+    echo To diagnose and fix issues, run:
+    echo   fix_all_dependencies.bat
+    echo.
+    echo Or see: WINDOWS_GUI_FIX.md
 ) else (
     echo.
     echo You can now use the system!
     echo.
     echo Quick start:
-    echo   1. Generate dataset:     python src/data_generator.py
-    echo   2. Train model:          python src/train.py
-    echo   3. Generate trajectory:  python src/inference.py
+    echo   1. Run 3D Trajectory GUI:  python run_trajectory_gui.py
+    echo   2. Generate dataset:       python src/data_generator.py
+    echo   3. Train model:            python src/train.py
+    echo   4. Generate trajectory:    python src/inference.py
     echo.
     echo For more information, see README.md
 )
