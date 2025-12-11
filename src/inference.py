@@ -15,7 +15,7 @@ import numpy as np
 from typing import List, Tuple, Optional, Dict
 import json
 
-from model import create_model
+from .model import create_model
 
 
 class TrajectoryPredictor:
