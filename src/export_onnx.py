@@ -99,23 +99,25 @@ class ONNXExporter:
         wrapped_model = GeneratorWrapper(self.model.decoder, seq_len)
         wrapped_model.eval()
         
-        # Export to ONNX
-        torch.onnx.export(
-            wrapped_model,
-            (z, start, end),
-            output_path,
-            export_params=True,
-            opset_version=opset_version,
-            do_constant_folding=True,
-            input_names=['latent', 'start', 'end'],
-            output_names=['trajectory'],
-            dynamic_axes={
-                'latent': {0: 'batch_size'},
-                'start': {0: 'batch_size'},
-                'end': {0: 'batch_size'},
-                'trajectory': {0: 'batch_size'}
-            }
-        )
+        # Export to ONNX (using legacy exporter for compatibility)
+        with torch.no_grad():
+            torch.onnx.export(
+                wrapped_model,
+                (z, start, end),
+                output_path,
+                export_params=True,
+                opset_version=opset_version,
+                do_constant_folding=True,
+                input_names=['latent', 'start', 'end'],
+                output_names=['trajectory'],
+                dynamic_axes={
+                    'latent': {0: 'batch_size'},
+                    'start': {0: 'batch_size'},
+                    'end': {0: 'batch_size'},
+                    'trajectory': {0: 'batch_size'}
+                },
+                dynamo=False  # Use legacy JIT-based exporter
+            )
         
         print(f"✓ ONNX model exported to {output_path}")
         

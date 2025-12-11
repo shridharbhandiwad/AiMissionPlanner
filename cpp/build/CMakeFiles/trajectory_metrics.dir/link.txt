@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtrajectory_metrics.a CMakeFiles/trajectory_metrics.dir/trajectory_metrics.cpp.o
+/usr/bin/ranlib libtrajectory_metrics.a
