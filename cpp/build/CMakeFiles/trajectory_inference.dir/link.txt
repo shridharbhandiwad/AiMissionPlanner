@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtrajectory_inference.a CMakeFiles/trajectory_inference.dir/trajectory_inference.cpp.o
+/usr/bin/ranlib libtrajectory_inference.a

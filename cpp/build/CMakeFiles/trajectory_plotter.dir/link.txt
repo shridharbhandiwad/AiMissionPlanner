@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtrajectory_plotter.a CMakeFiles/trajectory_plotter.dir/trajectory_plotter.cpp.o
+/usr/bin/ranlib libtrajectory_plotter.a

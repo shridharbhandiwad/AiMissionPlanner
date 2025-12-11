@@ -75,7 +75,15 @@ target_link_libraries(trajectory_metrics
     trajectory_inference
 )
 
-# Executable
+add_library(trajectory_plotter
+    trajectory_plotter.cpp
+)
+
+target_link_libraries(trajectory_plotter
+    trajectory_inference
+)
+
+# Executables
 add_executable(trajectory_demo
     main.cpp
 )
@@ -86,8 +94,19 @@ target_link_libraries(trajectory_demo
     ${ONNXRUNTIME_LIBRARIES}
 )
 
+add_executable(trajectory_app
+    trajectory_app.cpp
+)
+
+target_link_libraries(trajectory_app
+    trajectory_inference
+    trajectory_metrics
+    trajectory_plotter
+    ${ONNXRUNTIME_LIBRARIES}
+)
+
 # Installation
-install(TARGETS trajectory_demo trajectory_inference
+install(TARGETS trajectory_app trajectory_demo trajectory_inference trajectory_plotter
     RUNTIME DESTINATION bin
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
@@ -96,6 +115,7 @@ install(TARGETS trajectory_demo trajectory_inference
 install(FILES 
     trajectory_inference.h
     trajectory_metrics.h
+    trajectory_plotter.h
     DESTINATION include
 )
 

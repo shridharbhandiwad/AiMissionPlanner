@@ -1,0 +1,1 @@
+/usr/bin/g++ -O3 -DNDEBUG CMakeFiles/trajectory_demo.dir/main.cpp.o -o trajectory_demo  -Wl,-rpath,/workspace/libs/onnxruntime-linux-x64-1.16.3/lib: libtrajectory_inference.a libtrajectory_metrics.a /workspace/libs/onnxruntime-linux-x64-1.16.3/lib/libonnxruntime.so libtrajectory_inference.a /workspace/libs/onnxruntime-linux-x64-1.16.3/lib/libonnxruntime.so 
