@@ -1,0 +1,161 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                                                                    ║
+║              WINDOWS BUILD - HELP & DOCUMENTATION INDEX            ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Choose the document that best matches your situation:
+
+══════════════════════════════════════════════════════════════════════
+                    QUICK START & ESSENTIALS
+══════════════════════════════════════════════════════════════════════
+
+▶ WINDOWS_BUILD_QUICKSTART.txt
+  Quick reference card with essential commands and troubleshooting.
+  Best for: Quick lookup of commands and common errors.
+
+▶ START_HERE_WINDOWS.txt
+  General starting point for Windows builds.
+  Best for: First-time builders who want an overview.
+
+▶ READ_THIS_IF_BUILD_FAILED.txt
+  Help specifically for when a build just failed.
+  Best for: Immediate help after encountering an error.
+
+══════════════════════════════════════════════════════════════════════
+                    TOOLS & VERIFICATION
+══════════════════════════════════════════════════════════════════════
+
+▶ check_build_environment.bat
+  [EXECUTABLE] Verifies your build environment and tools.
+  Best for: Checking what's installed and what's missing.
+
+▶ FIX_WINDOWS_BUILD.bat
+  [EXECUTABLE] Clean and rebuild with improved error handling.
+  Best for: Fixing build issues by starting fresh.
+
+▶ build.bat
+  [EXECUTABLE] Main build script (now with better error detection).
+  Best for: Normal builds after environment is set up.
+
+══════════════════════════════════════════════════════════════════════
+                    COMPREHENSIVE GUIDES
+══════════════════════════════════════════════════════════════════════
+
+▶ WINDOWS_BUILD_FIXED.md
+  Complete guide covering:
+    • What was fixed and why
+    • Required tools with installation instructions
+    • Troubleshooting common issues
+    • Running the application
+  Best for: In-depth understanding of Windows build process.
+
+▶ BUILD_FIX_SUMMARY.md
+  Technical details of the fixes:
+    • Problem analysis
+    • Solution implementation
+    • Why the fixes work
+    • Testing procedures
+  Best for: Understanding the technical details.
+
+▶ WINDOWS_BUILD_ISSUE_RESOLVED.txt
+  Summary of the specific issue that was just fixed.
+  Best for: Understanding what went wrong and how it's fixed.
+
+══════════════════════════════════════════════════════════════════════
+                    EXISTING DOCUMENTATION
+══════════════════════════════════════════════════════════════════════
+
+▶ WINDOWS_BUILD_GUIDE.md
+  General Windows build guide.
+
+▶ FIX_EXECUTABLE_NOT_FOUND.md
+  Help for when .exe files aren't created.
+
+▶ WINDOWS_BUILD_FIX_SUMMARY.md
+  Earlier fixes and improvements.
+
+▶ README.md
+  Main project documentation.
+
+══════════════════════════════════════════════════════════════════════
+                    BUILD FOLDER DOCUMENTATION
+══════════════════════════════════════════════════════════════════════
+
+▶ build/README_BUILD_ISSUE.txt
+  Information about Linux vs Windows build artifacts.
+
+══════════════════════════════════════════════════════════════════════
+                    RECOMMENDED WORKFLOW
+══════════════════════════════════════════════════════════════════════
+
+For first-time Windows build:
+  1. Read: WINDOWS_BUILD_QUICKSTART.txt
+  2. Run: check_build_environment.bat
+  3. Install missing tools (check will tell you how)
+  4. Run: FIX_WINDOWS_BUILD.bat
+  5. If issues: WINDOWS_BUILD_FIXED.md
+
+For rebuild after error:
+  1. Read: READ_THIS_IF_BUILD_FAILED.txt
+  2. Run: check_build_environment.bat
+  3. Run: FIX_WINDOWS_BUILD.bat
+
+For understanding what was fixed:
+  1. Read: WINDOWS_BUILD_ISSUE_RESOLVED.txt
+  2. For details: BUILD_FIX_SUMMARY.md
+
+══════════════════════════════════════════════════════════════════════
+                    COMMAND QUICK REFERENCE
+══════════════════════════════════════════════════════════════════════
+
+Check environment:           check_build_environment.bat
+Clean and build:             FIX_WINDOWS_BUILD.bat
+Normal build:                build.bat
+Manual clean:                rmdir /s /q build
+Run demo:                    cd build && trajectory_demo.exe
+Run app:                     cd build && trajectory_app.exe --help
+
+══════════════════════════════════════════════════════════════════════
+                    TOOL INSTALLATION LINKS
+══════════════════════════════════════════════════════════════════════
+
+CMake:          https://cmake.org/download/
+MSYS2/MinGW:    https://www.msys2.org/
+MinGW-w64:      https://www.mingw-w64.org/
+ONNX Runtime:   [Auto-downloaded by build scripts]
+
+══════════════════════════════════════════════════════════════════════
+                    FILE LOCATIONS
+══════════════════════════════════════════════════════════════════════
+
+All documentation:          cpp/ folder (this folder)
+Build scripts:              cpp/ folder
+Build output:               cpp/build/ folder
+Executables after build:    cpp/build/*.exe
+Models:                     models/ folder
+
+══════════════════════════════════════════════════════════════════════
+                    GETTING HELP
+══════════════════════════════════════════════════════════════════════
+
+If you're stuck:
+  1. Run check_build_environment.bat to verify your setup
+  2. Read WINDOWS_BUILD_FIXED.md for troubleshooting
+  3. Check error messages - they now include specific solutions
+  4. Look for similar errors in the documentation
+  5. Make sure all tools are in your PATH
+
+Common problems:
+  • "CMake not found" → Install CMake, add to PATH, restart terminal
+  • "Make not found" → Install MinGW via MSYS2, add to PATH
+  • "No .exe files" → Run FIX_WINDOWS_BUILD.bat to clean and rebuild
+  • "Build folder locked" → Close programs, run as Administrator
+
+╔════════════════════════════════════════════════════════════════════╗
+║                                                                    ║
+║  Most users should start with:                                    ║
+║  1. check_build_environment.bat                                   ║
+║  2. FIX_WINDOWS_BUILD.bat                                         ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝

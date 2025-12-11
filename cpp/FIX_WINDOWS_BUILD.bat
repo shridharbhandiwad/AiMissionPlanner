@@ -43,27 +43,57 @@ if exist "build\trajectory_app" (
     )
 )
 
-REM Step 2: Force clean using PowerShell (most reliable)
+REM Step 2: Force clean using multiple methods
 if exist "build" (
     echo Removing old build folder...
-    powershell -Command "if (Test-Path 'build') { Remove-Item -Path 'build' -Recurse -Force -ErrorAction SilentlyContinue }" 2>nul
+    echo.
     
-    REM Fallback to standard method
-    if exist "build" (
-        rmdir /s /q build 2>nul
+    REM Method 1: Try to delete contents first
+    if exist "build\*" (
+        del /f /s /q "build\*" >nul 2>&1
     )
+    
+    REM Method 2: Remove subdirectories
+    for /d %%d in (build\*) do (
+        rmdir /s /q "%%d" >nul 2>&1
+    )
+    
+    REM Method 3: Try PowerShell if available
+    where powershell >nul 2>&1
+    if %ERRORLEVEL% EQU 0 (
+        powershell -Command "if (Test-Path 'build') { Remove-Item -Path 'build' -Recurse -Force -ErrorAction SilentlyContinue }" >nul 2>&1
+    )
+    
+    REM Method 4: Standard rmdir
+    if exist "build" (
+        rmdir /s /q build >nul 2>&1
+    )
+    
+    REM Give it a moment
+    timeout /t 1 /nobreak >nul 2>&1
     
     REM Final check
     if exist "build" (
+        echo WARNING: Could not fully remove build folder.
+        echo Some files may be locked. Trying one more time...
+        echo.
+        timeout /t 2 /nobreak >nul 2>&1
+        rmdir /s /q build >nul 2>&1
+    )
+    
+    if exist "build" (
         echo.
         echo ERROR: Could not remove build folder automatically.
-        echo Please manually delete it or run as Administrator.
+        echo Please:
+        echo   1. Close any programs that might have files open in build folder
+        echo   2. Try running this script as Administrator
+        echo   3. Or manually delete: rmdir /s /q build
         echo.
         pause
         exit /b 1
     )
     
-    echo Build folder removed successfully.
+    echo [SUCCESS] Build folder removed successfully.
     echo.
 )
 

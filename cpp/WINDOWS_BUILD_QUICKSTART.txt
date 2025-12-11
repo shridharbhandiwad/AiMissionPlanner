@@ -1,0 +1,116 @@
+================================================================================
+                    WINDOWS BUILD - QUICK START
+================================================================================
+
+PROBLEM: Build fails on Windows?
+
+SOLUTION: Run this first!
+--------------------------------------------------------------------------------
+
+    check_build_environment.bat
+
+This will tell you exactly what's missing and how to fix it.
+
+--------------------------------------------------------------------------------
+
+FIRST TIME BUILDING?
+--------------------------------------------------------------------------------
+
+1. Check your environment:
+   
+   check_build_environment.bat
+
+2. Install any missing tools the check reports
+
+3. Build the project:
+   
+   FIX_WINDOWS_BUILD.bat
+
+--------------------------------------------------------------------------------
+
+ALREADY BUILT BEFORE?
+--------------------------------------------------------------------------------
+
+Just run:
+
+   build.bat
+
+Or if you need to clean first:
+
+   FIX_WINDOWS_BUILD.bat
+
+--------------------------------------------------------------------------------
+
+WHAT YOU NEED
+--------------------------------------------------------------------------------
+
+[✓] CMake 3.15+         https://cmake.org/download/
+[✓] MinGW-w64 (G++)     https://www.msys2.org/
+[✓] Make (mingw32-make) Comes with MinGW
+[✓] ONNX Runtime        Auto-downloaded by build script
+
+--------------------------------------------------------------------------------
+
+QUICK INSTALL GUIDE
+--------------------------------------------------------------------------------
+
+CMake:
+  1. Download from https://cmake.org/download/
+  2. Check "Add to PATH" during installation
+  3. Restart terminal
+
+MinGW (via MSYS2 - easiest):
+  1. Download MSYS2 from https://www.msys2.org/
+  2. Run: pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make
+  3. Add to PATH: C:\msys64\mingw64\bin
+  4. Restart terminal
+
+--------------------------------------------------------------------------------
+
+COMMON ERRORS
+--------------------------------------------------------------------------------
+
+"CMake not found"
+  → Install CMake and add to PATH
+  → Download: https://cmake.org/download/
+
+"mingw32-make not found" or "g++ not found"
+  → Install MinGW via MSYS2
+  → Download: https://www.msys2.org/
+  → Then: pacman -S mingw-w64-x86_64-gcc
+
+"No .exe files created"
+  → Build folder has Linux artifacts
+  → Run: FIX_WINDOWS_BUILD.bat
+
+"Build folder won't delete"
+  → Close any programs that might have files open
+  → Run as Administrator
+  → Or manually: rmdir /s /q build
+
+--------------------------------------------------------------------------------
+
+AFTER SUCCESSFUL BUILD
+--------------------------------------------------------------------------------
+
+You should see in the build folder:
+
+  trajectory_app.exe       ← Main application
+  trajectory_demo.exe      ← Demo/test
+
+Run them:
+
+  cd build
+  trajectory_demo.exe
+  trajectory_app.exe --help
+
+--------------------------------------------------------------------------------
+
+NEED MORE HELP?
+--------------------------------------------------------------------------------
+
+Detailed guide:        WINDOWS_BUILD_FIXED.md
+Technical details:     BUILD_FIX_SUMMARY.md
+Environment check:     check_build_environment.bat
+
+================================================================================

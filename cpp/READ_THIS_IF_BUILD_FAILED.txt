@@ -1,0 +1,170 @@
+╔════════════════════════════════════════════════════════════════════╗
+║                                                                    ║
+║               BUILD FAILED? I'VE FIXED THE SCRIPTS!                ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Your build just failed, but don't worry - the scripts have been improved
+to handle the issue you encountered!
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    WHAT WENT WRONG                                 │
+└────────────────────────────────────────────────────────────────────┘
+
+The build script had issues with:
+  ✗ CMake warnings being treated as errors
+  ✗ Paths with spaces not being quoted properly
+  ✗ No verification that required tools are installed
+  ✗ Error messages weren't specific enough
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    WHAT'S BEEN FIXED                               │
+└────────────────────────────────────────────────────────────────────┘
+
+  ✓ CMake detection is now reliable (ignores warnings)
+  ✓ Paths with spaces are properly quoted
+  ✓ Pre-build verification of tools (CMake, MinGW, G++)
+  ✓ Better error messages with specific solutions
+  ✓ New environment check tool
+  ✓ Improved documentation
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    WHAT TO DO NOW                                  │
+└────────────────────────────────────────────────────────────────────┘
+
+STEP 1: Check your environment
+───────────────────────────────
+
+Run this to see if you have all required tools:
+
+    check_build_environment.bat
+
+This will tell you:
+  • What's installed correctly
+  • What's missing
+  • Where to download missing tools
+  • How to install them
+
+STEP 2: Install missing tools (if any)
+───────────────────────────────────────
+
+If the check shows missing tools, install them:
+
+  CMake:
+    Download: https://cmake.org/download/
+    Check "Add to PATH" during installation
+
+  MinGW (via MSYS2 - easiest):
+    1. Download: https://www.msys2.org/
+    2. Run: pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make
+    3. Add to PATH: C:\msys64\mingw64\bin
+    4. Restart your terminal
+
+STEP 3: Run the fixed build
+────────────────────────────
+
+Now run the improved build script:
+
+    FIX_WINDOWS_BUILD.bat
+
+This will:
+  ✓ Check for required tools
+  ✓ Clean the build folder completely
+  ✓ Download ONNX Runtime if needed
+  ✓ Build the project
+  ✓ Verify .exe files were created
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    EXPECTED RESULT                                 │
+└────────────────────────────────────────────────────────────────────┘
+
+After running FIX_WINDOWS_BUILD.bat, you should see:
+
+  [OK] CMake found
+  [OK] MinGW Make found
+  [OK] G++ compiler found
+  
+  Step 1: Running CMake Configuration...
+  CMake configuration completed successfully!
+  
+  Step 2: Building executables...
+  [Build output...]
+  Build step completed successfully!
+  
+  Step 3: Verifying build...
+  [OK] trajectory_app.exe created successfully
+  [OK] trajectory_demo.exe created successfully
+  
+  SUCCESS! Windows executables created.
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    COMMON ISSUES                                   │
+└────────────────────────────────────────────────────────────────────┘
+
+Issue: "CMake not found"
+→ Install CMake and make sure "Add to PATH" is checked
+→ Restart your terminal after installation
+
+Issue: "mingw32-make not found" or "g++ not found"
+→ Install MSYS2 and MinGW: https://www.msys2.org/
+→ Run: pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make
+→ Add C:\msys64\mingw64\bin to PATH
+→ Restart your terminal
+
+Issue: "Build folder won't delete"
+→ Close any programs that might have files open
+→ Run as Administrator
+→ Or manually delete: rmdir /s /q build
+
+Issue: "Still getting errors"
+→ Read WINDOWS_BUILD_FIXED.md for detailed troubleshooting
+→ Check BUILD_FIX_SUMMARY.md for technical details
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    HELPFUL FILES                                   │
+└────────────────────────────────────────────────────────────────────┘
+
+Quick Start:
+  → WINDOWS_BUILD_QUICKSTART.txt     Quick reference card
+  → check_build_environment.bat      Check your setup
+
+Detailed Guides:
+  → WINDOWS_BUILD_FIXED.md           Complete guide with solutions
+  → BUILD_FIX_SUMMARY.md             Technical details of fixes
+  → START_HERE_WINDOWS.txt           General Windows guide
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    TL;DR - THREE COMMANDS                          │
+└────────────────────────────────────────────────────────────────────┘
+
+  1. check_build_environment.bat      ← Check what's missing
+  
+  2. [Install any missing tools]      ← Follow the check's guidance
+  
+  3. FIX_WINDOWS_BUILD.bat            ← Build with fixed scripts
+
+┌────────────────────────────────────────────────────────────────────┐
+│                    AFTER SUCCESSFUL BUILD                          │
+└────────────────────────────────────────────────────────────────────┘
+
+Once the build succeeds, you'll have these files in the build folder:
+
+  trajectory_app.exe      ← Main application
+  trajectory_demo.exe     ← Demo/test program
+
+Run them:
+
+  cd build
+  trajectory_demo.exe
+  trajectory_app.exe --help
+
+Or with your ONNX model:
+
+  trajectory_app.exe --model ..\models\trajectory_generator.onnx --demo
+
+╔════════════════════════════════════════════════════════════════════╗
+║                                                                    ║
+║  Start here: check_build_environment.bat                          ║
+║  Then run:   FIX_WINDOWS_BUILD.bat                                ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
