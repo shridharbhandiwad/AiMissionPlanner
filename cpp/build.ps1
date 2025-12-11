@@ -5,10 +5,32 @@ Write-Host "Building Trajectory Generator (Windows)" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
 
+# Check if build directory contains Linux artifacts
+$buildDir = Join-Path $PSScriptRoot "build"
+if (Test-Path $buildDir) {
+    $linuxApp = Join-Path $buildDir "trajectory_app"
+    $windowsApp = Join-Path $buildDir "trajectory_app.exe"
+    
+    if ((Test-Path $linuxApp) -and -not (Test-Path $windowsApp)) {
+        Write-Host "WARNING: Found Linux build artifacts in build folder!" -ForegroundColor Red
+        Write-Host "This happens when you switch from Linux to Windows." -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "You need to clean the build folder first:" -ForegroundColor Yellow
+        Write-Host "  Remove-Item -Recurse -Force build" -ForegroundColor White
+        Write-Host ""
+        Write-Host "Then run build.ps1 again." -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "Press any key to exit..."
+        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+        exit 1
+    }
+}
+
 # Check for ONNX Runtime
 if (-not $env:ONNXRUNTIME_ROOT_DIR) {
     Write-Host "Warning: ONNXRUNTIME_ROOT_DIR not set" -ForegroundColor Yellow
     Write-Host "Attempting to download ONNX Runtime for Windows..." -ForegroundColor Yellow
+    Write-Host ""
     
     # Create libs directory
     $libsDir = Join-Path (Split-Path $PSScriptRoot) "libs"
@@ -24,11 +46,22 @@ if (-not $env:ONNXRUNTIME_ROOT_DIR) {
         $onnxUrl = "https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-win-x64-1.16.3.zip"
         $zipFile = "$onnxDir.zip"
         
-        Invoke-WebRequest -Uri $onnxUrl -OutFile $zipFile -UseBasicParsing
-        Expand-Archive -Path $zipFile -DestinationPath . -Force
-        Remove-Item $zipFile
-        Write-Host "ONNX Runtime downloaded" -ForegroundColor Green
+        try {
+            Invoke-WebRequest -Uri $onnxUrl -OutFile $zipFile -UseBasicParsing
+            Expand-Archive -Path $zipFile -DestinationPath . -Force
+            Remove-Item $zipFile
+            Write-Host "ONNX Runtime downloaded successfully!" -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to download ONNX Runtime!" -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Set-Location (Join-Path (Split-Path $PSScriptRoot) "cpp")
+            exit 1
+        }
+    } else {
+        Write-Host "ONNX Runtime already present" -ForegroundColor Green
     }
+    Write-Host ""
     
     $env:ONNXRUNTIME_ROOT_DIR = Join-Path (Get-Location) $onnxDir
     Set-Location (Join-Path (Split-Path $PSScriptRoot) "cpp")
@@ -37,7 +70,6 @@ if (-not $env:ONNXRUNTIME_ROOT_DIR) {
 }
 
 # Clean old CMake cache if it exists
-$buildDir = Join-Path $PSScriptRoot "build"
 if (Test-Path (Join-Path $buildDir "CMakeCache.txt")) {
     Write-Host "Cleaning old CMake cache..." -ForegroundColor Yellow
     Remove-Item (Join-Path $buildDir "CMakeCache.txt") -Force -ErrorAction SilentlyContinue
@@ -52,7 +84,9 @@ Set-Location $buildDir
 
 # Detect generator
 Write-Host ""
-Write-Host "Running CMake..." -ForegroundColor Cyan
+Write-Host "==========================================" -ForegroundColor Cyan
+Write-Host "Step 1: Running CMake Configuration..." -ForegroundColor Cyan
+Write-Host "==========================================" -ForegroundColor Cyan
 
 # Try to use Ninja if available, otherwise use default generator
 $generator = ""
@@ -76,12 +110,18 @@ $cmakeArgs = @(
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host ""
-    Write-Host "CMake configuration failed!" -ForegroundColor Red
+    Write-Host "==========================================" -ForegroundColor Red
+    Write-Host "ERROR: CMake configuration failed!" -ForegroundColor Red
+    Write-Host "==========================================" -ForegroundColor Red
     Write-Host ""
     Write-Host "Please ensure you have:" -ForegroundColor Yellow
     Write-Host "  1. CMake installed (version 3.15 or higher)" -ForegroundColor Yellow
     Write-Host "  2. A C++ compiler (Visual Studio, MinGW, or Clang)" -ForegroundColor Yellow
     Write-Host "  3. CMake and your compiler in your PATH" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "To check:" -ForegroundColor Yellow
+    Write-Host "  cmake --version" -ForegroundColor White
+    Write-Host "  cl.exe (for MSVC) or gcc --version (for MinGW)" -ForegroundColor White
     Write-Host ""
     Set-Location ..
     exit 1
@@ -89,14 +129,46 @@ if ($LASTEXITCODE -ne 0) {
 
 # Build
 Write-Host ""
-Write-Host "Building..." -ForegroundColor Cyan
+Write-Host "==========================================" -ForegroundColor Cyan
+Write-Host "Step 2: Building executables..." -ForegroundColor Cyan
+Write-Host "==========================================" -ForegroundColor Cyan
 cmake --build . --config Release
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host ""
-    Write-Host "Build failed!" -ForegroundColor Red
+    Write-Host "==========================================" -ForegroundColor Red
+    Write-Host "ERROR: Build failed!" -ForegroundColor Red
+    Write-Host "==========================================" -ForegroundColor Red
+    Write-Host ""
+    Write-Host "Check the error messages above." -ForegroundColor Yellow
+    Write-Host "Common issues:" -ForegroundColor Yellow
+    Write-Host "  - Missing compiler: Install Visual Studio or MinGW" -ForegroundColor White
+    Write-Host "  - Compiler not in PATH: Add compiler bin folder to PATH" -ForegroundColor White
+    Write-Host "  - Missing dependencies: Check CMakeLists.txt" -ForegroundColor White
+    Write-Host ""
     Set-Location ..
     exit 1
+}
+
+# Verify executables
+Write-Host ""
+Write-Host "==========================================" -ForegroundColor Cyan
+Write-Host "Step 3: Verifying build..." -ForegroundColor Cyan
+Write-Host "==========================================" -ForegroundColor Cyan
+
+$appExe = "trajectory_app.exe"
+$demoExe = "trajectory_demo.exe"
+
+if (Test-Path $appExe) {
+    Write-Host "[OK] trajectory_app.exe created successfully" -ForegroundColor Green
+} else {
+    Write-Host "[ERROR] trajectory_app.exe not found!" -ForegroundColor Red
+}
+
+if (Test-Path $demoExe) {
+    Write-Host "[OK] trajectory_demo.exe created successfully" -ForegroundColor Green
+} else {
+    Write-Host "[ERROR] trajectory_demo.exe not found!" -ForegroundColor Red
 }
 
 Write-Host ""
@@ -104,13 +176,15 @@ Write-Host "==========================================" -ForegroundColor Green
 Write-Host "Build complete!" -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
 Write-Host ""
-Write-Host "Executables:" -ForegroundColor Cyan
-Write-Host "  - trajectory_app.exe  (Main application)" -ForegroundColor White
-Write-Host "  - trajectory_demo.exe (Demo/test application)" -ForegroundColor White
+Write-Host "Executables in build folder:" -ForegroundColor Cyan
+Get-ChildItem -Filter "*.exe" | ForEach-Object { Write-Host "  - $($_.Name)" -ForegroundColor White }
 Write-Host ""
 Write-Host "To run:" -ForegroundColor Cyan
-Write-Host "  cd build" -ForegroundColor White
 Write-Host "  .\trajectory_app.exe --help" -ForegroundColor White
+Write-Host "  .\trajectory_demo.exe" -ForegroundColor White
+Write-Host ""
+Write-Host "To run with the model:" -ForegroundColor Cyan
+Write-Host "  .\trajectory_app.exe --model ..\models\trajectory_model.onnx --demo" -ForegroundColor White
 Write-Host ""
 
 Set-Location ..

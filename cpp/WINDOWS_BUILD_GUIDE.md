@@ -1,6 +1,59 @@
 # Windows Build Guide
 
-## Error: CMake Cache Mismatch
+## Common Issues and Solutions
+
+### Issue 1: Executable Not Found in Build Folder
+
+**Symptoms:**
+- `build.bat` runs successfully
+- CMake configures without errors
+- But you can't find `trajectory_app.exe` or `trajectory_demo.exe` in the build folder
+- You might see files like `trajectory_app` (without `.exe`)
+
+**Root Cause:**
+The build folder contains Linux executables from a previous build. When you try to build on Windows, the build system gets confused.
+
+**Solution:**
+
+**FASTEST WAY - Use the clean and build script:**
+```cmd
+clean_and_build.bat
+```
+OR
+```powershell
+.\clean_and_build.ps1
+```
+
+**Manual Method:**
+1. Delete the build folder:
+   ```cmd
+   rmdir /s /q build
+   ```
+   OR
+   ```powershell
+   Remove-Item -Recurse -Force build
+   ```
+
+2. Run the build script:
+   ```cmd
+   build.bat
+   ```
+   OR
+   ```powershell
+   .\build.ps1
+   ```
+
+The improved build scripts now:
+- ✓ Detect Linux artifacts and warn you
+- ✓ Show clear step-by-step progress
+- ✓ Verify that `.exe` files are actually created
+- ✓ List all executables at the end
+
+See `FIX_EXECUTABLE_NOT_FOUND.md` for detailed information.
+
+---
+
+### Issue 2: CMake Cache Mismatch
 
 If you see an error like:
 ```

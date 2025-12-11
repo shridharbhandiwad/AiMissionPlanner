@@ -1,0 +1,168 @@
+════════════════════════════════════════════════════════════════
+                  WINDOWS BUILD ISSUE - FIXED!
+════════════════════════════════════════════════════════════════
+
+ISSUE REPORTED:
+───────────────
+"Unable to find exe in build folder" after running build.bat
+
+ROOT CAUSE:
+───────────
+The cpp/build folder contains Linux executables (from the remote 
+Linux workspace). When you tried to build on Windows, CMake 
+configured successfully but no .exe files were created because 
+the build system was confused by the existing Linux binaries.
+
+SOLUTION:
+─────────
+Clean the build folder and rebuild from scratch on Windows.
+
+═══════════════════════════════════════════════════════════════
+                     QUICK FIX - DO THIS NOW
+═══════════════════════════════════════════════════════════════
+
+Navigate to the cpp folder and run:
+
+  PowerShell:
+    cd "D:\Zoppler Projects\AiMissionPlanner\cpp"
+    .\clean_and_build.ps1
+
+  Command Prompt / Git Bash:
+    cd "D:\Zoppler Projects\AiMissionPlanner\cpp"
+    clean_and_build.bat
+
+That's it! This will clean and rebuild everything properly.
+
+═══════════════════════════════════════════════════════════════
+                  WHAT'S BEEN IMPROVED
+═══════════════════════════════════════════════════════════════
+
+1. IMPROVED BUILD SCRIPTS (build.bat and build.ps1)
+   ✓ Now detect Linux artifacts and warn you before proceeding
+   ✓ Show clear step-by-step progress (Step 1, 2, 3)
+   ✓ Verify that .exe files are actually created
+   ✓ List all executables at the end
+   ✓ Better error messages with troubleshooting tips
+
+2. NEW CONVENIENCE SCRIPTS
+   ✓ clean_and_build.bat / clean_and_build.ps1
+     One-command solution to clean and rebuild
+
+3. COMPREHENSIVE DOCUMENTATION
+   ✓ cpp/START_HERE_WINDOWS.txt - Quick start guide
+   ✓ cpp/FIX_EXECUTABLE_NOT_FOUND.md - Detailed troubleshooting
+   ✓ cpp/WINDOWS_BUILD_GUIDE.md - Updated with this issue
+   ✓ cpp/build/README_BUILD_ISSUE.txt - In-folder quick reference
+   ✓ SOLUTION_EXECUTABLE_NOT_FOUND.md - Complete solution doc
+
+═══════════════════════════════════════════════════════════════
+                  FILE LOCATIONS - WHERE TO LOOK
+═══════════════════════════════════════════════════════════════
+
+Quick Start:
+  cpp/START_HERE_WINDOWS.txt ← Read this first!
+
+Build Scripts:
+  cpp/clean_and_build.bat       ← Use this! (Windows)
+  cpp/clean_and_build.ps1       ← Or this! (PowerShell)
+  cpp/build.bat                 ← Regular build (improved)
+  cpp/build.ps1                 ← Regular build (improved)
+
+Documentation:
+  cpp/FIX_EXECUTABLE_NOT_FOUND.md     ← Troubleshooting guide
+  cpp/WINDOWS_BUILD_GUIDE.md          ← General Windows guide
+  SOLUTION_EXECUTABLE_NOT_FOUND.md    ← Complete solution
+
+Quick Reference:
+  cpp/build/README_BUILD_ISSUE.txt    ← In the build folder
+
+═══════════════════════════════════════════════════════════════
+                  EXPECTED RESULTS
+═══════════════════════════════════════════════════════════════
+
+After running clean_and_build, you should see:
+
+  Step 1: Running CMake Configuration... ✓
+  Step 2: Building executables... ✓
+  Step 3: Verifying build... ✓
+  
+  [OK] trajectory_app.exe created successfully
+  [OK] trajectory_demo.exe created successfully
+  
+  Build complete!
+  
+  Executables in build folder:
+  - trajectory_app.exe
+  - trajectory_demo.exe
+
+═══════════════════════════════════════════════════════════════
+                  RUNNING YOUR APPLICATION
+═══════════════════════════════════════════════════════════════
+
+Once built:
+  cd build
+  trajectory_app.exe --help
+  trajectory_app.exe --model ..\models\trajectory_model.onnx --demo
+
+═══════════════════════════════════════════════════════════════
+                  PREREQUISITES CHECK
+═══════════════════════════════════════════════════════════════
+
+Before building, make sure you have:
+
+  ☐ CMake 3.15 or higher
+    Check: cmake --version
+    Download: https://cmake.org/download/
+
+  ☐ C++ Compiler (one of):
+    - Visual Studio 2019/2022 with C++ workload
+    - MinGW-w64
+    - LLVM/Clang for Windows
+    Check: gcc --version  or  cl.exe
+
+  ☐ Internet connection
+    (For automatic ONNX Runtime download)
+
+═══════════════════════════════════════════════════════════════
+                  TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+Issue: "cmake is not recognized"
+→ Install CMake and add it to PATH
+
+Issue: "No CMAKE_CXX_COMPILER could be found"  
+→ Install Visual Studio or MinGW
+
+Issue: "ONNX Runtime not found"
+→ Build script downloads it automatically
+→ Or download manually from GitHub releases
+
+Issue: Build succeeds but no executables
+→ Run: cd build && cmake --build . --verbose
+
+For detailed help, see: cpp/FIX_EXECUTABLE_NOT_FOUND.md
+
+═══════════════════════════════════════════════════════════════
+                  KEY LESSON
+═══════════════════════════════════════════════════════════════
+
+IMPORTANT: Always clean the build folder when switching between
+           Linux (remote workspace) and Windows (local machine)!
+
+TIP: Use the clean_and_build scripts for hassle-free rebuilds.
+
+═══════════════════════════════════════════════════════════════
+                  NEXT STEPS
+═══════════════════════════════════════════════════════════════
+
+1. Open PowerShell or Command Prompt
+2. Navigate to: D:\Zoppler Projects\AiMissionPlanner\cpp
+3. Run: clean_and_build.bat (or .ps1)
+4. Wait for build to complete
+5. Run: cd build && trajectory_app.exe --help
+
+That's it! Your Windows build will be ready.
+
+════════════════════════════════════════════════════════════════
+         Questions? See cpp/START_HERE_WINDOWS.txt
+════════════════════════════════════════════════════════════════
