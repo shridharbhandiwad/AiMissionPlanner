@@ -1,0 +1,53 @@
+╔════════════════════════════════════════════════════════════════╗
+║                  HOW TO BUILD ON WINDOWS                       ║
+╚════════════════════════════════════════════════════════════════╝
+
+YOUR ERROR:
+-----------
+You're trying to use build.sh (Linux) on Windows with Git Bash.
+The CMake cache was created in a Linux environment and conflicts
+with your Windows path.
+
+QUICK FIX (3 Steps):
+--------------------
+
+1. Open PowerShell or Git Bash in your project directory:
+   cd "D:/Zoppler Projects/AiMissionPlanner/cpp"
+
+2. Delete the old build directory:
+   
+   PowerShell:
+   Remove-Item -Recurse -Force build
+   
+   Git Bash:
+   rm -rf build
+   
+   CMD:
+   rmdir /s /q build
+
+3. Use the Windows build script:
+   
+   PowerShell (RECOMMENDED):
+   .\build.ps1
+   
+   Git Bash / CMD:
+   build.bat
+
+That's it! The build script will:
+✓ Download ONNX Runtime for Windows automatically
+✓ Configure CMake properly for Windows
+✓ Build the project
+
+FILES CREATED FOR YOU:
+---------------------
+✓ build.bat             - Windows batch build script
+✓ build.ps1             - PowerShell build script (recommended)
+✓ WINDOWS_BUILD_GUIDE.md - Detailed Windows build instructions
+
+IMPORTANT:
+----------
+• DO NOT use build.sh on Windows (it's for Linux only)
+• Use build.ps1 or build.bat instead
+• Always clean build directory when switching between environments
+
+Need more help? Read WINDOWS_BUILD_GUIDE.md
