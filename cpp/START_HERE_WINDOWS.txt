@@ -1,8 +1,19 @@
 ╔═════════════════════════════════════════════════════════════════╗
 ║                                                                 ║
 ║        BUILDING ON WINDOWS? START HERE!                         ║
+║                    🎉 UPDATED WITH FIXES                        ║
 ║                                                                 ║
 ╚═════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────┐
+│                  🆕 NEW: IMPROVED BUILD SCRIPTS                 │
+└─────────────────────────────────────────────────────────────────┘
+
+  Before building, check your environment:
+  
+    check_build_environment.bat
+  
+  This will verify you have all required tools and guide you!
 
 ┌─────────────────────────────────────────────────────────────────┐
 │ PROBLEM: Can't find .exe files after running build.bat?        │
@@ -15,22 +26,28 @@
 │                      QUICK FIX (30 seconds)                     │
 └─────────────────────────────────────────────────────────────────┘
 
-  Option 1 (EASIEST - One Command):
-  ──────────────────────────────────
+  Option 1 (RECOMMENDED - Most Reliable):
+  ────────────────────────────────────────
+    FIX_WINDOWS_BUILD.bat
+  
+  This will:
+    ✓ Check for required tools
+    ✓ Clean the build folder completely
+    ✓ Download ONNX Runtime if needed
+    ✓ Build and verify .exe files
+
+  Option 2 (Simple Clean and Build):
+  ───────────────────────────────────
   PowerShell:
     .\clean_and_build.ps1
 
-  Command Prompt / Git Bash:
+  Command Prompt:
     clean_and_build.bat
 
-
-  Option 2 (Manual - Two Commands):
-  ──────────────────────────────────
-  1. Delete build folder:
-     rmdir /s /q build
-
-  2. Run build script:
-     build.bat    (or .\build.ps1 in PowerShell)
+  Option 3 (Quick Rebuild):
+  ──────────────────────────
+  If you just want to rebuild:
+    build.bat
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                        WHAT TO EXPECT                           │
@@ -50,15 +67,16 @@ After running the fixed build scripts, you'll see:
     trajectory_demo.exe
 
 ┌─────────────────────────────────────────────────────────────────┐
-│                      WHAT I'VE FIXED                            │
+│                      LATEST IMPROVEMENTS                        │
 └─────────────────────────────────────────────────────────────────┘
 
-  ✓ Created clean_and_build.bat / .ps1 (one-command solution)
-  ✓ Updated build.bat with Linux artifact detection
-  ✓ Updated build.ps1 with better error messages
-  ✓ Added step-by-step progress indicators
-  ✓ Added automatic verification that .exe files are created
-  ✓ Created comprehensive troubleshooting guides
+  ✓ Fixed CMake warning detection (no more false failures)
+  ✓ Added pre-build tool verification (checks for CMake/MinGW/G++)
+  ✓ Fixed path handling for directories with spaces
+  ✓ Created check_build_environment.bat (verify setup)
+  ✓ Improved build folder cleaning (more reliable)
+  ✓ Better error messages with specific solutions
+  ✓ Created comprehensive documentation (WINDOWS_BUILD_FIXED.md)
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                      RUNNING YOUR APP                           │
@@ -74,25 +92,28 @@ Once built successfully:
 │                      NEED MORE HELP?                            │
 └─────────────────────────────────────────────────────────────────┘
 
-  Quick Reference:
-    → This folder: START_HERE_WINDOWS.txt (you are here)
-    → Build issue: build/README_BUILD_ISSUE.txt
+  Quick Start:
+    → WINDOWS_BUILD_QUICKSTART.txt (quick reference card)
+    → check_build_environment.bat (check your setup)
   
-  Detailed Guides:
-    → FIX_EXECUTABLE_NOT_FOUND.md (troubleshooting this issue)
-    → WINDOWS_BUILD_GUIDE.md (general Windows build guide)
-    → ../SOLUTION_EXECUTABLE_NOT_FOUND.md (complete solution)
+  Comprehensive Guides:
+    → WINDOWS_BUILD_FIXED.md (complete guide with fixes)
+    → BUILD_FIX_SUMMARY.md (technical details of fixes)
+    → FIX_EXECUTABLE_NOT_FOUND.md (troubleshooting)
+    → WINDOWS_BUILD_GUIDE.md (general build guide)
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                      PREREQUISITES                              │
 └─────────────────────────────────────────────────────────────────┘
 
-  Make sure you have:
-    ☐ CMake 3.15+ (cmake --version)
-    ☐ C++ Compiler (Visual Studio, MinGW, or Clang)
-    ☐ Internet connection (to download ONNX Runtime)
+  Required tools (run check_build_environment.bat to verify):
+    ☐ CMake 3.15+ → https://cmake.org/download/
+    ☐ MinGW-w64 (G++) → https://www.msys2.org/
+    ☐ Make (mingw32-make) → Comes with MinGW
+    ☐ Internet connection → To download ONNX Runtime
 
-  The build scripts will download ONNX Runtime automatically!
+  🆕 Not sure if you have these? Run:
+      check_build_environment.bat
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                      KEY TAKEAWAY                               │
@@ -104,5 +125,6 @@ Once built successfully:
   TIP: Use clean_and_build.bat/.ps1 for hassle-free rebuilds
 
 ╔═════════════════════════════════════════════════════════════════╗
-║  Ready? Run: clean_and_build.bat (or .ps1)                     ║
+║  Step 1: check_build_environment.bat                           ║
+║  Step 2: FIX_WINDOWS_BUILD.bat                                 ║
 ╚═════════════════════════════════════════════════════════════════╝

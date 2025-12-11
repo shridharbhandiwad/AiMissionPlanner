@@ -6,6 +6,63 @@ echo Building Trajectory Generator (Windows)
 echo ==========================================
 echo.
 
+REM Check for required tools
+echo Checking for required build tools...
+echo.
+
+where cmake >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] CMake not found in PATH!
+    echo.
+    echo Please install CMake from: https://cmake.org/download/
+    echo Make sure to add CMake to your system PATH during installation.
+    echo.
+    pause
+    exit /b 1
+) else (
+    for /f "tokens=*" %%i in ('cmake --version') do (
+        echo [OK] %%i
+        goto :cmake_found
+    )
+    :cmake_found
+)
+
+where mingw32-make >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] MinGW Make found
+    set MAKE_CMD=mingw32-make
+) else (
+    where make >nul 2>&1
+    if %ERRORLEVEL% EQU 0 (
+        echo [OK] Make found
+        set MAKE_CMD=make
+    ) else (
+        echo [WARNING] Neither mingw32-make nor make found in PATH!
+        echo.
+        echo Please install MinGW-w64 from: https://www.mingw-w64.org/
+        echo Or install via MSYS2: https://www.msys2.org/
+        echo Make sure to add MinGW's bin folder to your system PATH.
+        echo.
+        echo Example PATH entry: C:\msys64\mingw64\bin
+        echo.
+        pause
+        exit /b 1
+    )
+)
+
+where g++ >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] G++ compiler found
+) else (
+    echo [WARNING] G++ compiler not found in PATH!
+    echo This is needed for building C++ code.
+    echo.
+)
+
+echo.
+echo All required tools found. Continuing with build...
+echo.
+
 REM Check if build directory exists and contains Linux artifacts
 if exist "build\trajectory_app" (
     if not exist "build\trajectory_app.exe" (
@@ -24,11 +81,22 @@ if exist "build\trajectory_app" (
     )
 )
 
+REM Store the cpp directory path
+set CPP_DIR=%~dp0
+set CPP_DIR=%CPP_DIR:~0,-1%
+
 REM Check for ONNX Runtime
 if "%ONNXRUNTIME_ROOT_DIR%"=="" (
     echo Warning: ONNXRUNTIME_ROOT_DIR not set
-    echo Attempting to download ONNX Runtime for Windows...
+    echo Attempting to use local copy or download ONNX Runtime for Windows...
     echo.
+    
+    REM Check if ONNX Runtime exists in cpp folder (user may have copied it)
+    if exist "%CPP_DIR%\include\onnxruntime_cxx_api.h" (
+        set "ONNXRUNTIME_ROOT_DIR=%CPP_DIR%"
+        echo Found ONNX Runtime in cpp folder!
+        goto :onnx_found
+    )
     
     REM Create libs directory
     if not exist "..\libs" mkdir "..\libs"
@@ -52,11 +120,14 @@ if "%ONNXRUNTIME_ROOT_DIR%"=="" (
     echo.
     
     cd onnxruntime-win-x64-1.16.3
-    set ONNXRUNTIME_ROOT_DIR=%CD%
-    cd ..\..\cpp
-) else (
-    echo Using ONNX Runtime from: %ONNXRUNTIME_ROOT_DIR%
+    set "ONNXRUNTIME_ROOT_DIR=%CD%"
+    cd "%CPP_DIR%"
 )
+
+:onnx_found
+echo.
+echo Using ONNX Runtime from: %ONNXRUNTIME_ROOT_DIR%
+echo.
 
 REM Clean old CMake cache if it exists
 if exist "build\CMakeCache.txt" (
@@ -74,9 +145,10 @@ echo.
 echo ==========================================
 echo Step 1: Running CMake Configuration...
 echo ==========================================
-cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DONNXRUNTIME_ROOT_DIR=%ONNXRUNTIME_ROOT_DIR% ..
+cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DONNXRUNTIME_ROOT_DIR="%ONNXRUNTIME_ROOT_DIR%" ..
 
-if %ERRORLEVEL% NEQ 0 (
+REM Check if CMakeLists.txt was processed (more reliable than ERRORLEVEL)
+if not exist "CMakeCache.txt" (
     echo.
     echo ==========================================
     echo ERROR: CMake configuration failed!
@@ -94,14 +166,30 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
+echo CMake configuration completed successfully!
+echo.
+
 REM Build
 echo.
 echo ==========================================
 echo Step 2: Building executables...
 echo ==========================================
-cmake --build . --config Release
+echo.
 
-if %ERRORLEVEL% NEQ 0 (
+REM Try cmake --build first
+cmake --build . --config Release
+set BUILD_RESULT=%ERRORLEVEL%
+
+REM If cmake --build fails, try mingw32-make directly
+if %BUILD_RESULT% NEQ 0 (
+    echo.
+    echo CMake build command failed, trying mingw32-make directly...
+    echo.
+    mingw32-make
+    set BUILD_RESULT=%ERRORLEVEL%
+)
+
+if %BUILD_RESULT% NEQ 0 (
     echo.
     echo ==========================================
     echo ERROR: Build failed!
@@ -112,10 +200,21 @@ if %ERRORLEVEL% NEQ 0 (
     echo   - Missing MinGW: Install from https://www.mingw-w64.org/
     echo   - Compiler not in PATH: Add MinGW bin folder to PATH
     echo   - Missing dependencies: Check CMakeLists.txt
+    echo   - ONNX Runtime library not found
+    echo.
+    echo Attempting to show build log...
+    if exist "CMakeFiles\CMakeError.log" (
+        echo.
+        echo === CMake Error Log ===
+        type CMakeFiles\CMakeError.log
+    )
     echo.
     cd ..
     exit /b 1
 )
+
+echo.
+echo Build step completed successfully!
 
 REM Check if executables were created
 echo.
