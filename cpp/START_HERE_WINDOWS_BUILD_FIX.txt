@@ -1,0 +1,67 @@
+===============================================================================
+   WINDOWS BUILD FIX - CANNOT FIND .EXE FILES
+===============================================================================
+
+PROBLEM: After running build.bat, no .exe files are found in build folder.
+
+CAUSE: Build folder contains Linux executables from previous build.
+
+QUICK FIX (RECOMMENDED):
+------------------------
+1. Open Command Prompt
+2. Navigate to cpp folder:
+   cd cpp
+
+3. Run the fix script:
+   FIX_WINDOWS_BUILD.bat
+
+4. Press Y when prompted
+5. Wait for build to complete
+6. Done! Your .exe files will be in cpp\build\
+
+
+ALTERNATIVE METHODS:
+-------------------
+If the above doesn't work, try these in order:
+
+Method 1 - Force Clean:
+  FORCE_CLEAN.bat
+  (then run build.bat)
+
+Method 2 - Manual Delete:
+  rmdir /s /q build
+  build.bat
+
+Method 3 - PowerShell:
+  Remove-Item -Path build -Recurse -Force
+  .\build.bat
+
+Method 4 - Git Bash:
+  rm -rf build
+  ./build.bat
+
+
+VERIFICATION:
+-------------
+After building, check for .exe files:
+  cd build
+  dir *.exe
+
+You should see:
+  trajectory_app.exe
+  trajectory_demo.exe
+
+
+RUNNING THE APPLICATION:
+------------------------
+cd build
+trajectory_app.exe --help
+trajectory_demo.exe
+
+
+DETAILED HELP:
+--------------
+See: WINDOWS_BUILD_FIX_GUIDE.md
+
+
+===============================================================================

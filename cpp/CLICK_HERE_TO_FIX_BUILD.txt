@@ -1,0 +1,111 @@
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║          WINDOWS BUILD ISSUE? NO .EXE FILES FOUND?                   ║
+║                                                                      ║
+║                    *** CLICK HERE FOR FIX ***                        ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+
+PROBLEM: You ran build.bat but can't find .exe files
+CAUSE:   Linux build artifacts in the build folder
+FIX:     One simple command!
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║                      AUTOMATED FIX (30 SECONDS)                      ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+1. Open Command Prompt
+
+2. Go to cpp folder:
+   cd cpp
+
+3. Run this:
+   FIX_WINDOWS_BUILD.bat
+
+4. Press Y when asked
+
+5. Wait 2-5 minutes
+
+6. DONE! Your .exe files are in cpp\build\
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                      WHAT THIS DOES                                  ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+✓ Removes old Linux build files
+✓ Downloads ONNX Runtime (if needed)
+✓ Builds proper Windows executables
+✓ Verifies .exe files were created
+✓ Shows you exactly where they are
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    IF THAT DOESN'T WORK                              ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+Try these in order:
+
+METHOD 1: Force clean
+  FORCE_CLEAN.bat
+  (then run build.bat)
+
+METHOD 2: Manual delete
+  rmdir /s /q build
+  build.bat
+
+METHOD 3: Run as Administrator
+  Right-click Command Prompt → Run as Administrator
+  Then try METHOD 1 or METHOD 2
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                       NEED MORE HELP?                                ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+Read: WINDOWS_BUILD_FIX_GUIDE.md
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                         QUICK VERIFY                                 ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+After building, check for .exe files:
+
+  cd build
+  dir *.exe
+
+You should see:
+  ✓ trajectory_app.exe
+  ✓ trajectory_demo.exe
+
+If you see files WITHOUT .exe (like "trajectory_app"), 
+the build used Linux config by mistake. Run FIX_WINDOWS_BUILD.bat again.
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                      RUN YOUR APPLICATION                            ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+cd build
+
+# Show help
+trajectory_app.exe --help
+
+# Run demo
+trajectory_demo.exe
+
+# Run with model
+trajectory_app.exe --model ..\..\models\trajectory_generator.onnx --demo
+
+
+═══════════════════════════════════════════════════════════════════════
+
+That's it! If you have questions, see WINDOWS_BUILD_FIX_GUIDE.md
+
+═══════════════════════════════════════════════════════════════════════

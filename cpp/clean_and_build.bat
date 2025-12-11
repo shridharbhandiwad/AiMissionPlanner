@@ -21,10 +21,32 @@ if /i not "%confirm%"=="Y" (
 echo.
 echo Cleaning build folder...
 if exist "build" (
-    rmdir /s /q build
-    echo Build folder deleted.
+    REM Use multiple methods to ensure clean deletion
+    echo Attempting to remove build folder...
+    
+    REM Method 1: Try standard rmdir
+    rmdir /s /q build 2>nul
+    
+    REM Method 2: If that fails, try rd
+    if exist "build" rd /s /q build 2>nul
+    
+    REM Method 3: If still exists, try removing contents first
+    if exist "build" (
+        del /f /s /q build\* 2>nul
+        rmdir /s /q build 2>nul
+    )
+    
+    if exist "build" (
+        echo WARNING: Could not fully delete build folder.
+        echo Please manually delete it or run: rmdir /s /q build
+        echo.
+        pause
+        exit /b 1
+    )
+    
+    echo Build folder deleted successfully.
 ) else (
-    echo Build folder doesn't exist (nothing to clean).
+    echo Build folder doesn't exist - nothing to clean.
 )
 
 echo.
@@ -33,5 +55,15 @@ echo.
 
 call build.bat
 
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo Build failed! Check errors above.
+    pause
+    exit /b 1
+)
+
 echo.
-echo Done!
+echo ==========================================
+echo Clean and Build Complete!
+echo ==========================================
+pause

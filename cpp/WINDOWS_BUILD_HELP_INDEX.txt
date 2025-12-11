@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║              WINDOWS BUILD HELP - WHICH FILE DO I NEED?              ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+
+CHOOSE YOUR SITUATION:
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 1: I just want to fix it RIGHT NOW                         │
+│                                                                      │
+│ ACTION: Run this command                                             │
+│   FIX_WINDOWS_BUILD.bat                                              │
+│                                                                      │
+│ See also: CLICK_HERE_TO_FIX_BUILD.txt                                │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 2: I want a quick summary of the fix                       │
+│                                                                      │
+│ READ: START_HERE_WINDOWS_BUILD_FIX.txt                               │
+│                                                                      │
+│ This is a 1-page quick reference with all solutions                  │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 3: I tried the fix but it didn't work                      │
+│                                                                      │
+│ READ: WINDOWS_BUILD_FIX_GUIDE.md                                     │
+│                                                                      │
+│ Comprehensive troubleshooting guide with:                            │
+│  - Multiple solution methods                                         │
+│  - Detailed error explanations                                       │
+│  - Step-by-step troubleshooting                                      │
+│  - Common issues and solutions                                       │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 4: The build folder won't delete                           │
+│                                                                      │
+│ ACTION: Run this command                                             │
+│   FORCE_CLEAN.bat                                                    │
+│                                                                      │
+│ This uses multiple cleanup methods including PowerShell              │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 5: I'm a developer and want technical details              │
+│                                                                      │
+│ READ: WINDOWS_BUILD_FIX_SUMMARY.md                                   │
+│                                                                      │
+│ Contains:                                                            │
+│  - Root cause analysis                                               │
+│  - Implementation details                                            │
+│  - Technical architecture                                            │
+│  - Prevention strategies                                             │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 6: I want to understand the complete solution              │
+│                                                                      │
+│ READ: WINDOWS_BUILD_FIX_COMPLETE.md (in project root)                │
+│                                                                      │
+│ Complete overview of the problem, solution, and implementation       │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ SITUATION 7: I need general build instructions                       │
+│                                                                      │
+│ READ: README.md                                                      │
+│                                                                      │
+│ General project documentation including Windows build instructions   │
+└──────────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════
+
+QUICK COMMAND REFERENCE:
+
+Build from scratch:         FIX_WINDOWS_BUILD.bat
+Just clean build folder:    FORCE_CLEAN.bat
+Normal build:               build.bat
+Clean and rebuild:          clean_and_build.bat
+
+═══════════════════════════════════════════════════════════════════════
+
+MOST COMMON CASE:
+
+If you ran build.bat and got no .exe files, just run:
+  FIX_WINDOWS_BUILD.bat
+
+Press Y when prompted, wait 2 minutes, and you're done!
+
+═══════════════════════════════════════════════════════════════════════
