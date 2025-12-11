@@ -1,0 +1,108 @@
+╔═════════════════════════════════════════════════════════════════╗
+║                                                                 ║
+║        BUILDING ON WINDOWS? START HERE!                         ║
+║                                                                 ║
+╚═════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────┐
+│ PROBLEM: Can't find .exe files after running build.bat?        │
+│                                                                 │
+│ CAUSE: Build folder contains Linux executables from remote     │
+│        workspace. You need Windows executables (.exe)          │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                      QUICK FIX (30 seconds)                     │
+└─────────────────────────────────────────────────────────────────┘
+
+  Option 1 (EASIEST - One Command):
+  ──────────────────────────────────
+  PowerShell:
+    .\clean_and_build.ps1
+
+  Command Prompt / Git Bash:
+    clean_and_build.bat
+
+
+  Option 2 (Manual - Two Commands):
+  ──────────────────────────────────
+  1. Delete build folder:
+     rmdir /s /q build
+
+  2. Run build script:
+     build.bat    (or .\build.ps1 in PowerShell)
+
+┌─────────────────────────────────────────────────────────────────┐
+│                        WHAT TO EXPECT                           │
+└─────────────────────────────────────────────────────────────────┘
+
+After running the fixed build scripts, you'll see:
+
+  ✓ Step 1: Running CMake Configuration...
+  ✓ Step 2: Building executables...
+  ✓ Step 3: Verifying build...
+  
+  [OK] trajectory_app.exe created successfully
+  [OK] trajectory_demo.exe created successfully
+  
+  Executables in build folder:
+    trajectory_app.exe
+    trajectory_demo.exe
+
+┌─────────────────────────────────────────────────────────────────┐
+│                      WHAT I'VE FIXED                            │
+└─────────────────────────────────────────────────────────────────┘
+
+  ✓ Created clean_and_build.bat / .ps1 (one-command solution)
+  ✓ Updated build.bat with Linux artifact detection
+  ✓ Updated build.ps1 with better error messages
+  ✓ Added step-by-step progress indicators
+  ✓ Added automatic verification that .exe files are created
+  ✓ Created comprehensive troubleshooting guides
+
+┌─────────────────────────────────────────────────────────────────┐
+│                      RUNNING YOUR APP                           │
+└─────────────────────────────────────────────────────────────────┘
+
+Once built successfully:
+
+  cd build
+  trajectory_app.exe --help
+  trajectory_app.exe --model ..\models\trajectory_model.onnx --demo
+
+┌─────────────────────────────────────────────────────────────────┐
+│                      NEED MORE HELP?                            │
+└─────────────────────────────────────────────────────────────────┘
+
+  Quick Reference:
+    → This folder: START_HERE_WINDOWS.txt (you are here)
+    → Build issue: build/README_BUILD_ISSUE.txt
+  
+  Detailed Guides:
+    → FIX_EXECUTABLE_NOT_FOUND.md (troubleshooting this issue)
+    → WINDOWS_BUILD_GUIDE.md (general Windows build guide)
+    → ../SOLUTION_EXECUTABLE_NOT_FOUND.md (complete solution)
+
+┌─────────────────────────────────────────────────────────────────┐
+│                      PREREQUISITES                              │
+└─────────────────────────────────────────────────────────────────┘
+
+  Make sure you have:
+    ☐ CMake 3.15+ (cmake --version)
+    ☐ C++ Compiler (Visual Studio, MinGW, or Clang)
+    ☐ Internet connection (to download ONNX Runtime)
+
+  The build scripts will download ONNX Runtime automatically!
+
+┌─────────────────────────────────────────────────────────────────┐
+│                      KEY TAKEAWAY                               │
+└─────────────────────────────────────────────────────────────────┘
+
+  RULE: Always clean the build folder when switching between
+        Linux and Windows!
+  
+  TIP: Use clean_and_build.bat/.ps1 for hassle-free rebuilds
+
+╔═════════════════════════════════════════════════════════════════╗
+║  Ready? Run: clean_and_build.bat (or .ps1)                     ║
+╚═════════════════════════════════════════════════════════════════╝
