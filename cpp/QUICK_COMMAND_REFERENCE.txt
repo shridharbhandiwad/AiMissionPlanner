@@ -1,0 +1,202 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║              WINDOWS BUILD - QUICK COMMAND REFERENCE                 ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════════════
+                          BUILD COMMANDS
+═══════════════════════════════════════════════════════════════════════
+
+Fix everything (RECOMMENDED):
+  cd cpp
+  FIX_WINDOWS_BUILD.bat
+
+Clean and rebuild:
+  cd cpp
+  clean_and_build.bat
+
+Just build:
+  cd cpp
+  build.bat
+
+Force clean only:
+  cd cpp
+  FORCE_CLEAN.bat
+
+Manual clean and build:
+  cd cpp
+  rmdir /s /q build
+  build.bat
+
+
+═══════════════════════════════════════════════════════════════════════
+                          VERIFICATION COMMANDS
+═══════════════════════════════════════════════════════════════════════
+
+Check for .exe files:
+  cd cpp\build
+  dir *.exe
+
+List all files in build:
+  cd cpp\build
+  dir /B
+
+Check CMake version:
+  cmake --version
+
+Check compiler:
+  gcc --version
+  or
+  cl
+
+
+═══════════════════════════════════════════════════════════════════════
+                          RUNNING YOUR APP
+═══════════════════════════════════════════════════════════════════════
+
+Show help:
+  cd cpp\build
+  trajectory_app.exe --help
+
+Run demo:
+  cd cpp\build
+  trajectory_demo.exe
+
+Generate with start/end points:
+  cd cpp\build
+  trajectory_app.exe --start 0 0 100 --end 800 600 200
+
+Generate with model:
+  cd cpp\build
+  trajectory_app.exe --model ..\..\models\trajectory_generator.onnx --demo
+
+Generate and save to CSV:
+  cd cpp\build
+  trajectory_app.exe --start 0 0 100 --end 800 600 200 --csv
+
+
+═══════════════════════════════════════════════════════════════════════
+                          TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════
+
+If "cmake not found":
+  1. Download from: https://cmake.org/download/
+  2. Install with "Add to PATH" checked
+  3. Restart Command Prompt
+  4. Verify: cmake --version
+
+If "no compiler found":
+  Option A - MinGW:
+    1. Download from: https://www.mingw-w64.org/
+    2. Add to PATH: C:\mingw64\bin
+    3. Verify: gcc --version
+  
+  Option B - Visual Studio:
+    1. Download from: https://visualstudio.microsoft.com/
+    2. Install "Desktop development with C++"
+
+If "access denied":
+  1. Close all programs using build folder
+  2. Run Command Prompt as Administrator
+  3. Run: FORCE_CLEAN.bat
+
+If build succeeds but no .exe:
+  cd cpp\build
+  dir /s *.exe
+  (Check Release\ and Debug\ subdirectories)
+
+
+═══════════════════════════════════════════════════════════════════════
+                          HELP FILES
+═══════════════════════════════════════════════════════════════════════
+
+Which file to read:        WINDOWS_BUILD_HELP_INDEX.txt
+Quick fix:                 START_HERE_WINDOWS_BUILD_FIX.txt
+Comprehensive guide:       WINDOWS_BUILD_FIX_GUIDE.md
+Technical details:         WINDOWS_BUILD_FIX_SUMMARY.md
+Complete overview:         WINDOWS_BUILD_FIX_COMPLETE.md (in root)
+This summary:              SOLUTION_IMPLEMENTED.txt
+
+
+═══════════════════════════════════════════════════════════════════════
+                          COMMON SCENARIOS
+═══════════════════════════════════════════════════════════════════════
+
+SCENARIO 1: First time building on Windows
+  → Run: FIX_WINDOWS_BUILD.bat
+
+SCENARIO 2: Build worked before, now it doesn't
+  → Run: clean_and_build.bat
+
+SCENARIO 3: Switched from Linux to Windows
+  → Run: FIX_WINDOWS_BUILD.bat
+
+SCENARIO 4: Build folder won't delete
+  → Run: FORCE_CLEAN.bat
+
+SCENARIO 5: No .exe files after build
+  → Run: FIX_WINDOWS_BUILD.bat
+
+SCENARIO 6: Just need regular build
+  → Run: build.bat
+
+
+═══════════════════════════════════════════════════════════════════════
+                          EXPECTED OUTPUT
+═══════════════════════════════════════════════════════════════════════
+
+After successful build:
+  cpp\build\trajectory_app.exe     ✓
+  cpp\build\trajectory_demo.exe    ✓
+
+File sizes (approximately):
+  trajectory_app.exe    ~250 KB
+  trajectory_demo.exe   ~220 KB
+
+
+═══════════════════════════════════════════════════════════════════════
+                          PREVENTION
+═══════════════════════════════════════════════════════════════════════
+
+Always clean when switching platforms:
+  rmdir /s /q cpp\build
+
+Or use:
+  FIX_WINDOWS_BUILD.bat
+
+
+═══════════════════════════════════════════════════════════════════════
+                          MOST COMMON FIX
+═══════════════════════════════════════════════════════════════════════
+
+95% of the time, this is all you need:
+
+  cd cpp
+  FIX_WINDOWS_BUILD.bat
+  [Press Y]
+  [Wait 2 minutes]
+  cd build
+  trajectory_app.exe --help
+
+
+═══════════════════════════════════════════════════════════════════════
+                          EMERGENCY RESET
+═══════════════════════════════════════════════════════════════════════
+
+If everything fails:
+
+  1. rmdir /s /q cpp\build
+  2. rmdir /s /q libs\onnxruntime-win-x64-1.16.3
+  3. cd cpp
+  4. FIX_WINDOWS_BUILD.bat
+
+This forces complete re-download and rebuild.
+
+
+═══════════════════════════════════════════════════════════════════════
+
+Save this file for quick reference!
+
+═══════════════════════════════════════════════════════════════════════

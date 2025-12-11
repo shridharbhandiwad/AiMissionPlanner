@@ -21,6 +21,24 @@ A high-performance C++ application for generating and visualizing diverse 3D tra
 
 ### Installation
 
+#### Windows
+
+```batch
+# Install dependencies:
+# 1. CMake: https://cmake.org/download/
+# 2. MinGW or Visual Studio
+# 3. Git (optional, for cloning)
+
+# The build script will automatically download ONNX Runtime
+cd cpp
+build.bat
+```
+
+**⚠️ WINDOWS BUILD ISSUE?** If you get "no .exe files found" or build errors:
+- See: `CLICK_HERE_TO_FIX_BUILD.txt` for quick fix
+- Run: `FIX_WINDOWS_BUILD.bat` (one-click solution)
+- Read: `WINDOWS_BUILD_FIX_GUIDE.md` for detailed help
+
 #### Linux (Ubuntu/Debian)
 
 ```bash
@@ -46,7 +64,21 @@ export ONNXRUNTIME_ROOT_DIR=/path/to/onnxruntime
 
 ## Building
 
-### Quick Build
+### Quick Build (Windows)
+
+```batch
+cd cpp
+build.bat
+```
+
+**Having issues?** Run `FIX_WINDOWS_BUILD.bat` instead.
+
+This script will:
+1. Automatically download ONNX Runtime if needed
+2. Configure the project with CMake
+3. Build all executables (creates .exe files)
+
+### Quick Build (Linux/Mac)
 
 ```bash
 cd cpp
@@ -71,6 +103,13 @@ make -j$(nproc)
 
 ### Basic Usage
 
+**Windows:**
+```batch
+cd cpp\build
+trajectory_app.exe --start 0 0 100 --end 800 600 200
+```
+
+**Linux/Mac:**
 ```bash
 cd cpp/build
 ./trajectory_app --start 0 0 100 --end 800 600 200
@@ -97,6 +136,12 @@ Options:
 
 #### Example 1: Simple Trajectory Generation
 
+**Windows:**
+```batch
+trajectory_app.exe --start 0 0 100 --end 800 600 200 --waypoints 50 --output my_trajectories.png
+```
+
+**Linux/Mac:**
 ```bash
 ./trajectory_app \
     --start 0 0 100 \
@@ -211,8 +256,28 @@ Total time: **< 2 seconds** for complete pipeline
 
 ## Troubleshooting
 
+### Windows: Cannot Find .exe Files
+
+**Problem**: After running `build.bat`, no `.exe` files exist in build folder.
+
+**Solution**: The build folder likely contains Linux artifacts. Run:
+```batch
+FIX_WINDOWS_BUILD.bat
+```
+
+Or see: `WINDOWS_BUILD_FIX_GUIDE.md` for detailed instructions.
+
 ### ONNX Runtime Not Found
 
+**Windows:**
+```batch
+REM The build script automatically downloads it
+REM Or set manually:
+set ONNXRUNTIME_ROOT_DIR=C:\path\to\onnxruntime
+build.bat
+```
+
+**Linux/Mac:**
 ```bash
 export ONNXRUNTIME_ROOT_DIR=/path/to/onnxruntime
 # Or let build.sh download it automatically
