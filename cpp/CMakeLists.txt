@@ -58,13 +58,21 @@ include_directories(
     ${ONNXRUNTIME_INCLUDE_DIRS}
 )
 
-# Library
+# Libraries
 add_library(trajectory_inference
     trajectory_inference.cpp
 )
 
 target_link_libraries(trajectory_inference
     ${ONNXRUNTIME_LIBRARIES}
+)
+
+add_library(trajectory_metrics
+    trajectory_metrics.cpp
+)
+
+target_link_libraries(trajectory_metrics
+    trajectory_inference
 )
 
 # Executable
@@ -74,6 +82,7 @@ add_executable(trajectory_demo
 
 target_link_libraries(trajectory_demo
     trajectory_inference
+    trajectory_metrics
     ${ONNXRUNTIME_LIBRARIES}
 )
 
@@ -84,7 +93,9 @@ install(TARGETS trajectory_demo trajectory_inference
     ARCHIVE DESTINATION lib
 )
 
-install(FILES trajectory_inference.h
+install(FILES 
+    trajectory_inference.h
+    trajectory_metrics.h
     DESTINATION include
 )
 
