@@ -22,7 +22,7 @@ from tqdm import tqdm
 import json
 from typing import Dict, Tuple
 
-from model import create_model, TrajectoryLoss
+from .model import create_model, TrajectoryLoss
 
 
 class TrajectoryDataset(Dataset):

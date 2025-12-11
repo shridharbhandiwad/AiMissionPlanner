@@ -19,8 +19,8 @@ import json
 from typing import Dict, List
 from tqdm import tqdm
 
-from inference import TrajectoryPredictor, evaluate_trajectory_quality, compare_trajectories
-from train import TrajectoryDataset
+from .inference import TrajectoryPredictor, evaluate_trajectory_quality, compare_trajectories
+from .train import TrajectoryDataset
 
 
 class ModelEvaluator:

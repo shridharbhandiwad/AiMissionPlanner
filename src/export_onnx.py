@@ -18,7 +18,7 @@ import onnxruntime as ort
 import argparse
 import os
 
-from model import create_model
+from .model import create_model
 
 
 class ONNXExporter:

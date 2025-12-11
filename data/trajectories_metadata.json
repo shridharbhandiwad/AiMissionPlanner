@@ -1,0 +1,19 @@
+{
+  "n_samples": 50000,
+  "n_points": 50,
+  "trajectory_shape": [
+    50000,
+    50,
+    3
+  ],
+  "methods_used": [
+    "bezier",
+    "spline",
+    "dubins"
+  ],
+  "avg_metrics": {
+    "path_length": 1345.6939998149726,
+    "avg_curvature": 0.09319847495908178,
+    "smoothness_score": 0.9615445340739288
+  }
+}
