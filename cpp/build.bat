@@ -1,5 +1,6 @@
 @echo off
 REM Build script for Trajectory Generator C++ application (Windows)
+setlocal EnableExtensions EnableDelayedExpansion
 
 echo ==========================================
 echo Building Trajectory Generator (Windows)
@@ -11,7 +12,7 @@ echo Checking for required build tools...
 echo.
 
 where cmake >nul 2>&1
-if %ERRORLEVEL% NEQ 0 (
+if errorlevel 1 (
     echo [ERROR] CMake not found in PATH!
     echo.
     echo Please install CMake from: https://cmake.org/download/
@@ -20,20 +21,17 @@ if %ERRORLEVEL% NEQ 0 (
     pause
     exit /b 1
 ) else (
-    for /f "tokens=*" %%i in ('cmake --version') do (
-        echo [OK] %%i
-        goto :cmake_found
-    )
-    :cmake_found
+    REM Print the "cmake version X.Y.Z" line without using GOTO in a block
+    for /f "usebackq delims=" %%i in (`cmake --version ^| findstr /r /c:"^cmake version"`) do echo [OK] %%i
 )
 
 where mingw32-make >nul 2>&1
-if %ERRORLEVEL% EQU 0 (
+if not errorlevel 1 (
     echo [OK] MinGW Make found
     set MAKE_CMD=mingw32-make
 ) else (
     where make >nul 2>&1
-    if %ERRORLEVEL% EQU 0 (
+    if not errorlevel 1 (
         echo [OK] Make found
         set MAKE_CMD=make
     ) else (
@@ -51,7 +49,7 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 where g++ >nul 2>&1
-if %ERRORLEVEL% EQU 0 (
+if not errorlevel 1 (
     echo [OK] G++ compiler found
 ) else (
     echo [WARNING] G++ compiler not found in PATH!
@@ -95,36 +93,33 @@ if "%ONNXRUNTIME_ROOT_DIR%"=="" (
     if exist "%CPP_DIR%\include\onnxruntime_cxx_api.h" (
         set "ONNXRUNTIME_ROOT_DIR=%CPP_DIR%"
         echo Found ONNX Runtime in cpp folder!
-        goto :onnx_found
-    )
-    
-    REM Create libs directory
-    if not exist "..\libs" mkdir "..\libs"
-    cd ..\libs
-    
-    REM Download ONNX Runtime if not present
-    if not exist "onnxruntime-win-x64-1.16.3" (
-        echo Downloading ONNX Runtime 1.16.3 for Windows...
-        curl -L -o onnxruntime-win-x64-1.16.3.zip https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-win-x64-1.16.3.zip
-        if %ERRORLEVEL% NEQ 0 (
-            echo Failed to download ONNX Runtime!
-            cd ..\cpp
-            exit /b 1
-        )
-        tar -xf onnxruntime-win-x64-1.16.3.zip
-        del onnxruntime-win-x64-1.16.3.zip
-        echo ONNX Runtime downloaded successfully!
     ) else (
-        echo ONNX Runtime already present
+        REM Create libs directory
+        if not exist "..\libs" mkdir "..\libs"
+        cd ..\libs
+        
+        REM Download ONNX Runtime if not present
+        if not exist "onnxruntime-win-x64-1.16.3" (
+            echo Downloading ONNX Runtime 1.16.3 for Windows...
+            curl -L -o onnxruntime-win-x64-1.16.3.zip https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-win-x64-1.16.3.zip
+            if errorlevel 1 (
+                echo Failed to download ONNX Runtime!
+                cd ..\cpp
+                exit /b 1
+            )
+            tar -xf onnxruntime-win-x64-1.16.3.zip
+            del onnxruntime-win-x64-1.16.3.zip
+            echo ONNX Runtime downloaded successfully!
+        ) else (
+            echo ONNX Runtime already present
+        )
+        echo.
+        
+        cd onnxruntime-win-x64-1.16.3
+        set "ONNXRUNTIME_ROOT_DIR=%CD%"
+        cd "%CPP_DIR%"
     )
-    echo.
-    
-    cd onnxruntime-win-x64-1.16.3
-    set "ONNXRUNTIME_ROOT_DIR=%CD%"
-    cd "%CPP_DIR%"
 )
-
-:onnx_found
 echo.
 echo Using ONNX Runtime from: %ONNXRUNTIME_ROOT_DIR%
 echo.
@@ -189,7 +184,7 @@ if %BUILD_RESULT% NEQ 0 (
     set BUILD_RESULT=%ERRORLEVEL%
 )
 
-if %BUILD_RESULT% NEQ 0 (
+if not "%BUILD_RESULT%"=="0" (
     echo.
     echo ==========================================
     echo ERROR: Build failed!
